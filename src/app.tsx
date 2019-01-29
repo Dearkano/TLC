@@ -1,11 +1,29 @@
 import * as React from 'react';
+import Template from './template';
 
-export class App extends React.Component<undefined, undefined> {
+interface State {
+  data: number[];
+}
+
+export class App extends React.Component<undefined, State> {
+  state = {
+    data: []
+  };
+  print() {
+    this.setState({ data: [] }, () => this.setState({ data: [1, 2, 3] }));
+  }
+
   render() {
+    const { data } = this.state;
     return (
-      <div>
-        <h2>Welcome to React with Typescript!</h2>
-      </div>
+      <>
+        <button onClick={() => this.print()}>print</button>
+        <div style={{ height: '10px', overflow: 'hidden' }}>
+          {data.map(item => (
+            <Template item={item} />
+          ))}
+        </div>
+      </>
     );
   }
 }
