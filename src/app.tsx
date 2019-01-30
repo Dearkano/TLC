@@ -1,15 +1,17 @@
 import * as React from 'react';
-import Operation from './Pages/Operation';
+import Home from './Pages/home'
+import Login from './Pages/login';
+import global, { GlobalState } from './Containers';
+import { Subscribe, Provider } from 'unstated';
 
-interface Props {}
-interface State {}
-
-export class App extends React.Component<Props, State> {
-  render() {
-    return (
-      <>
-        <Operation />
-      </>
-    );
-  }
-}
+export const App: React.SFC = () => (
+  <div>
+    <Provider>
+      <Subscribe to={[global]}>
+        {(g: GlobalState) => (
+          <div>{true ? <Home /> : <Login />}</div>
+        )}
+      </Subscribe>
+    </Provider>
+  </div>
+);

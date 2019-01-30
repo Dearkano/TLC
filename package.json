@@ -60,7 +60,8 @@
     "react": "16.7.0",
     "react-dom": "16.7.0",
     "react-hot-loader": "4.6.3",
-    "tslib": "^1.9.3"
+    "tslib": "^1.9.3",
+    "unstated": "^2.1.1"
   },
   "devDependencies": {
     "babel-plugin-transform-async-to-generator": "^6.24.1",

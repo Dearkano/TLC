@@ -14,18 +14,20 @@ function getU8Array(data: any) {
 
 interface Props {
   item: ISurvey;
+  callback: (id: number) => void;
+  path: string;
 }
 
 interface State {}
 
 export default class extends React.Component<Props, State> {
   componentDidMount() {
+    console.log(this.props.item)
     this.print();
   }
   print() {
-    const { item } = this.props;
-    console.log(item);
-    html2canvas(document.getElementById(`print${item}`)).then(function(
+    const { item, callback, path } = this.props;
+    html2canvas(document.getElementById(`print${item.id}`)).then(function(
       canvas: any
     ) {
       const contentWidth = canvas.width;
@@ -59,12 +61,13 @@ export default class extends React.Component<Props, State> {
       }
 
       const decode = getU8Array(pdf.output());
-      fs.writeFileSync(`./output/${item.id}.pdf`, decode);
+      fs.writeFileSync(`${path}/${item.id}.pdf`, decode);
+      callback(item.id);
     });
   }
 
   render() {
     const { item } = this.props;
-    return <div id={`print${item}`}>{item.name}</div>;
+    return <div id={`print${item.id}`}>{item.name}</div>;
   }
 }
