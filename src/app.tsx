@@ -1,28 +1,14 @@
 import * as React from 'react';
-import Template from './template';
+import Operation from './Pages/Operation';
 
-interface State {
-  data: number[];
-}
+interface Props {}
+interface State {}
 
-export class App extends React.Component<undefined, State> {
-  state = {
-    data: []
-  };
-  print() {
-    this.setState({ data: [] }, () => this.setState({ data: [1, 2, 3] }));
-  }
-
+export class App extends React.Component<Props, State> {
   render() {
-    const { data } = this.state;
     return (
       <>
-        <button onClick={() => this.print()}>print</button>
-        <div style={{ height: '10px', overflow: 'hidden' }}>
-          {data.map(item => (
-            <Template item={item} />
-          ))}
-        </div>
+        <Operation />
       </>
     );
   }

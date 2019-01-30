@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
+import { ISurvey } from '@tlc';
 
 const fs = require('fs');
 
@@ -12,7 +13,7 @@ function getU8Array(data: any) {
 }
 
 interface Props {
-  item: number;
+  item: ISurvey;
 }
 
 interface State {}
@@ -23,6 +24,7 @@ export default class extends React.Component<Props, State> {
   }
   print() {
     const { item } = this.props;
+    console.log(item);
     html2canvas(document.getElementById(`print${item}`)).then(function(
       canvas: any
     ) {
@@ -57,22 +59,12 @@ export default class extends React.Component<Props, State> {
       }
 
       const decode = getU8Array(pdf.output());
-      fs.writeFileSync(`./output/${item}.pdf`, decode);
+      fs.writeFileSync(`./output/${item.id}.pdf`, decode);
     });
   }
 
   render() {
     const { item } = this.props;
-    let r = [];
-    for (let i = item; i < item*120; i++) {
-      r.push(i);
-    }
-    return (
-      <div id={`print${item}`}>
-        {r.map(i => (
-          <h2>Welcome to React with Typescript！！!{i}</h2>
-        ))}
-      </div>
-    );
+    return <div id={`print${item}`}>{item.name}</div>;
   }
 }
