@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Upload, Icon, message, Button, Progress } from 'antd';
+import { Upload, Icon, message, Button, Progress, Divider } from 'antd';
 import Template from './template';
 import { readFile } from '../Utils/xlsx';
 import { ISurvey } from '@tlc';
@@ -12,6 +12,7 @@ interface State {
   filepath1: string;
   disable: boolean;
   outputPath: string;
+  mode: 'preview' | 'production';
 }
 
 export default class extends React.Component<Props, State> {
@@ -20,14 +21,15 @@ export default class extends React.Component<Props, State> {
     this.state = {
       data: [],
       renderOver: [],
-      filepath1: '',
-      disable: true,
-      outputPath: ''
+      filepath1: './input/data.xls',
+      disable: false,
+      outputPath: './output',
+      mode: 'preview'
     };
   }
   componentDidMount() {
-    // const data = readFile().slice(1);
-    //this.setState({ data });
+    const data = readFile(this.state.filepath1).slice(1);
+    this.setState({ data });
   }
   print() {
     const { filepath1 } = this.state;
@@ -94,7 +96,7 @@ export default class extends React.Component<Props, State> {
   };
 
   render() {
-    const { data, renderOver, disable,outputPath } = this.state;
+    const { data, renderOver, disable, outputPath, mode } = this.state;
     let count = 0;
     for (const item of renderOver) {
       if (item === true) {
@@ -104,46 +106,92 @@ export default class extends React.Component<Props, State> {
 
     return (
       <div className="column">
-        <div style={{ width: '100%' }}>
-          <Dragger name="file" onChange={this.onXls1Change}>
-            <p className="ant-upload-drag-icon">
-              <Icon type="inbox" />
-            </p>
-            <p className="ant-upload-text">点击或拖拽文件到这里</p>
-          </Dragger>
-        </div>
-        <div style={{ width: '100%' }}>
-          <Dragger name="file" onChange={this.onOutputChange} directory>
-            <p className="ant-upload-drag-icon">
-              <Icon type="inbox" />
-            </p>
-            <p className="ant-upload-text">选择目标文件夹</p>
-          </Dragger>
-        </div>
-        <div
-          className="row"
-          style={{ justifyContent: 'space-around', marginTop: '20px' }}
+        <Button
+          style={{ marginBottom: '1rem', marginTop: '1rem' }}
+          type="primary"
+          onClick={() =>
+            this.setState({
+              mode: mode === 'preview' ? 'production' : 'preview',
+              data: []
+            })
+          }
         >
-          <Button
-            disabled={disable}
-            type="primary"
-            onClick={() => this.print()}
-          >
-            生成
-          </Button>
-          <Progress
-            type="circle"
-            percent={(count * 100) / (renderOver.length - 1)}
-          />
-        </div>
-        <div style={{ height: 0, overflow: 'hidden' }}>
-          {data.map(
-            item =>
-        (
-                <Template key={item.id} item={item} path={outputPath} callback={this.destory} />
-              )
-          )}
-        </div>
+          {mode === 'preview' ? '切换到输出模式' : '切换到预览模式'}
+        </Button>
+
+        {mode === 'preview' && (
+          <>
+            <div className="dragger">
+              <Dragger name="file" onChange={this.onXls1Change}>
+                <p className="ant-upload-drag-icon">
+                  <Icon type="inbox" />
+                </p>
+                <p className="ant-upload-text">点击或拖拽文件到这里</p>
+              </Dragger>
+            </div>
+            {data.length !== 0 && (
+              <Template
+                key={data[0].id}
+                item={data[0]}
+                path={outputPath}
+                callback={this.destory}
+              />
+            )}
+          </>
+        )}
+
+        {mode === 'production' && (
+          <>
+            <div className="row">
+              <div className="dragger">
+                <Dragger name="file" onChange={this.onXls1Change}>
+                  <p className="ant-upload-drag-icon">
+                    <Icon type="inbox" />
+                  </p>
+                  <p className="ant-upload-text">点击或拖拽文件到这里</p>
+                </Dragger>
+              </div>
+              <div className="dragger">
+                <Dragger name="file" onChange={this.onOutputChange} directory>
+                  <p className="ant-upload-drag-icon">
+                    <Icon type="inbox" />
+                  </p>
+                  <p className="ant-upload-text">选择目标文件夹</p>
+                </Dragger>
+              </div>
+            </div>
+            <div
+              className="row"
+              style={{ justifyContent: 'space-around', marginTop: '20px' }}
+            >
+              <Button
+                disabled={disable}
+                type="primary"
+                onClick={() => this.print()}
+              >
+                生成
+              </Button>
+              {data.length !== 0 && (
+                <Progress
+                  type="circle"
+                  percent={(count * 100) / (renderOver.length - 1)}
+                />
+              )}
+            </div>
+            <Divider />
+
+            <div style={{ height: 0, overflow: 'hidden' }}>
+              {data.map(item => (
+                <Template
+                  key={item.id}
+                  item={item}
+                  path={outputPath}
+                  callback={this.destory}
+                />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     );
   }

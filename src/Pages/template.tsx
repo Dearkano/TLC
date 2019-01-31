@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
 import { ISurvey } from '@tlc';
+import { Table } from 'antd';
 
 const fs = require('fs');
 
@@ -22,7 +23,7 @@ interface State {}
 
 export default class extends React.Component<Props, State> {
   componentDidMount() {
-    console.log(this.props.item)
+    console.log(this.props.item);
     this.print();
   }
   print() {
@@ -68,6 +69,90 @@ export default class extends React.Component<Props, State> {
 
   render() {
     const { item } = this.props;
-    return <div id={`print${item.id}`}>{item.name}</div>;
+
+    return (
+      <div id={`print${item.id}`} className="template">
+        <div className="head1">TLC健康管理方案</div>
+        <BasicInformation item={item} />
+        <DietPlan item={item} />
+      </div>
+    );
   }
 }
+
+interface P {
+  item: ISurvey;
+}
+const BasicInformation: React.SFC<P> = ({ item }) => {
+  const columns1 = [
+    { title: '身高\n(cm)', key: 'height', dataIndex: 'height', width: 100 },
+    { title: '体重\n(kg)', key: 'weight', dataIndex: 'weight', width: 100 },
+    {
+      title: '腰围\n(cm)',
+      key: 'waistline',
+      dataIndex: 'waistline',
+      width: 100
+    },
+    { title: 'BMI\n(kg/m^2)', key: 'BMI', dataIndex: 'BMI', width: 100 },
+    {
+      title: '目标体重\n(kg)',
+      key: 'target28days',
+      dataIndex: 'target28days',
+      width: 100
+    },
+    {
+      title: '目标腰围\n(cm)',
+      key: 'targetWaistline',
+      dataIndex: 'targetWaistline',
+      width: 100
+    }
+  ];
+
+  const columns2 = [
+    {
+      title: '基础代谢\n(Kcal)',
+      key: 'restingEnergyComsumption',
+      dataIndex: 'restingEnergyComsumption',
+      width: 100
+    },
+    { title: '体脂率\n(%)', key: 'fatRate', dataIndex: 'fatRate', width: 100 },
+    {
+      title: '骨骼肌重量\n(kg)',
+      key: 'muscle',
+      dataIndex: 'muscle',
+      width: 100
+    },
+    {
+      title: '血压\n(mmHg)',
+      key: 'bloodPressure',
+      dataIndex: 'bloodPressure',
+      width: 100
+    },
+    { title: '内脏脂肪', key: 'VAT', dataIndex: 'VAT', width: 100 }
+  ];
+
+  const rows = [item];
+
+  return (
+    <div className="basic-module">
+      <div className="head2">一、基本信息</div>
+      <div className="basic-table">
+        <div className="text-center table-title">体格测量</div>
+        <Table dataSource={rows} columns={columns1} pagination={false} />
+      </div>
+      <div className="basic-table">
+        <div className="text-center table-title">体成分测量</div>
+        <Table dataSource={rows} columns={columns2} pagination={false} />
+      </div>
+    </div>
+  );
+};
+
+const DietPlan: React.SFC<P> = ({ item }) => {
+  return (
+    <div className="basic-module">
+      <div className="head2">二、饮食方案</div>
+      <div className="head3">(一)、总能量：1900Kcal</div>
+    </div>
+  );
+};
