@@ -1,13 +1,14 @@
 import * as React from 'react';
 import data from '../../data/target';
-import { ISurvey } from '@tlc';
+import { ISurvey, IData } from '@tlc';
 
 interface P {
-  item: ISurvey;
+  item: IData;
 }
 const Target: React.SFC<P> = ({ item }) => {
+  const { init, base } = item;
   let content = null;
-  if (item.BMI >= 28) {
+  if (init.BMI >= 28) {
     content = (
       <>
         <div className="paragraph">{data.content11}</div>
@@ -15,9 +16,9 @@ const Target: React.SFC<P> = ({ item }) => {
       </>
     );
   } else if (
-    item.BMI <= 28 &&
-    ((item.gender === '男' && item.fatRate > 20) ||
-      (item.gender === '女' && item.fatRate > 30))
+    init.BMI <= 28 &&
+    ((init.gender === '男' && init.fatRate > 20) ||
+      (init.gender === '女' && init.fatRate > 30))
   ) {
     content = (
       <>
@@ -37,25 +38,25 @@ const Target: React.SFC<P> = ({ item }) => {
   let waistline = 0;
   let content1 = '';
   if (
-    (item.gender === '男' && item.waistline > 100) ||
-    (item.gender === '女' && item.waistline > 90)
+    (init.gender === '男' && init.waistline > 100) ||
+    (init.gender === '女' && init.waistline > 90)
   ) {
-    waistline = Math.round(item.waistline * 0.08);
+    waistline = Math.round(init.waistline * 0.08);
     content1 = data.content4;
   } else if (
-    (item.gender === '男' && item.waistline < 100 && item.waistline >= 90) ||
-    (item.gender === '女' && item.waistline < 90 && item.waistline >= 80)
+    (init.gender === '男' && init.waistline < 100 && init.waistline >= 90) ||
+    (init.gender === '女' && init.waistline < 90 && init.waistline >= 80)
   ) {
-    waistline = Math.round(item.waistline * 0.06);
+    waistline = Math.round(init.waistline * 0.06);
     content1 = data.content5;
   } else {
-    waistline = Math.round(item.waistline * 0.04);
+    waistline = Math.round(init.waistline * 0.04);
     content1 = data.content6;
   }
 
   return (
     <div className="basic-module">
-      <div>{item.name}</div>
+      <div>{init.name}</div>
       <div className="head2">（一）目标</div>
       <div className="head3">1. 减脂</div>
       {content}

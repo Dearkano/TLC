@@ -2,13 +2,12 @@ import * as React from 'react';
 import { Upload, Icon, message, Button, Progress, Divider } from 'antd';
 import Template from './template';
 import { readBase, readInitData } from '../Utils/xlsx';
-import { ISurvey, IBase } from '@tlc';
+import { ISurvey, IBase, IData } from '@tlc';
 const Dragger = Upload.Dragger;
 
 interface Props {}
 interface State {
-  init: ISurvey[];
-  base: IBase[];
+  data: IData[];
   renderOver: boolean[];
   filepath1: string;
   filepath2: string;
@@ -21,8 +20,7 @@ export default class extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      init: [],
-      base: [],
+      data: [],
       renderOver: [],
       filepath1: './input/chushi.xls',
       filepath2: './input/jixian.xls',
@@ -32,10 +30,13 @@ export default class extends React.Component<Props, State> {
     };
   }
   componentDidMount() {
+    const data: IData[] = [];
     const init = readInitData(this.state.filepath1);
     const base = readBase(this.state.filepath2);
-    console.log(base)
-    this.setState({ init, base });
+    for (const i in init) {
+      data[i] = { init: init[i], base: base[i] };
+    }
+    this.setState({ data });
   }
   print() {
     const { filepath1 } = this.state;
@@ -43,13 +44,18 @@ export default class extends React.Component<Props, State> {
       message.error('请输入文件后再生成报告');
       return;
     }
-    const init = readInitData(filepath1);
+    const data: IData[] = [];
+    const init = readInitData(this.state.filepath1);
+    const base = readBase(this.state.filepath2);
+    for (const i in init) {
+      data[i] = { init: init[i], base: base[i] };
+    }
     const renderOver: boolean[] = [];
     for (const i in init) {
       renderOver[i] = false;
     }
-    this.setState({ init: [], renderOver: [] }, () =>
-      this.setState({ init, renderOver })
+    this.setState({ data: [], renderOver: [] }, () =>
+      this.setState({ data, renderOver })
     );
   }
 
@@ -102,7 +108,7 @@ export default class extends React.Component<Props, State> {
   };
 
   render() {
-    const { init, renderOver, disable, outputPath, mode } = this.state;
+    const { data, renderOver, disable, outputPath, mode } = this.state;
     let count = 0;
     for (const item of renderOver) {
       if (item === true) {
@@ -118,7 +124,7 @@ export default class extends React.Component<Props, State> {
           onClick={() =>
             this.setState({
               mode: mode === 'preview' ? 'production' : 'preview',
-              init: []
+              data: []
             })
           }
         >
@@ -135,10 +141,10 @@ export default class extends React.Component<Props, State> {
                 <p className="ant-upload-text">点击或拖拽文件到这里</p>
               </Dragger>
             </div>
-            {init.length !== 0 && (
+            {data && (
               <Template
-                key={init[0].id}
-                item={init[0]}
+                key={data[0].init.id}
+                item={data[0]}
                 path={outputPath}
                 callback={this.destory}
               />
@@ -177,7 +183,7 @@ export default class extends React.Component<Props, State> {
               >
                 生成
               </Button>
-              {init.length !== 0 && (
+              {data.length !== 0 && (
                 <Progress
                   type="circle"
                   percent={(count * 100) / (renderOver.length - 1)}
@@ -187,9 +193,9 @@ export default class extends React.Component<Props, State> {
             <Divider />
 
             <div style={{ height: 0, overflow: 'hidden' }}>
-              {init.map(item => (
+              {data.map(item => (
                 <Template
-                  key={item.id}
+                  key={item.init.id}
                   item={item}
                   path={outputPath}
                   callback={this.destory}

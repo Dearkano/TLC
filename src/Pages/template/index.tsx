@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as jsPDF from 'jspdf';
 import * as html2canvas from 'html2canvas';
-import { ISurvey } from '@tlc';
+import { ISurvey, IData } from '@tlc';
 import { Table } from 'antd';
 
-import Target from './target'
+import Target from './target';
 
 const fs = require('fs');
 
@@ -16,7 +16,7 @@ function getU8Array(data: any) {
 }
 
 interface Props {
-  item: ISurvey;
+  item: IData;
   callback: (id: number) => void;
   path: string;
 }
@@ -26,11 +26,12 @@ interface State {}
 export default class extends React.Component<Props, State> {
   componentDidMount() {
     console.log(this.props.item);
-    this.print()
+    this.print();
   }
   print() {
     const { item, callback, path } = this.props;
-    html2canvas(document.getElementById(`print${item.id}`)).then(function(
+    const { init, base } = item;
+    html2canvas(document.getElementById(`print${init.id}`)).then(function(
       canvas: any
     ) {
       const contentWidth = canvas.width;
@@ -44,9 +45,12 @@ export default class extends React.Component<Props, State> {
       const imgHeight = (595.28 / contentWidth) * contentHeight;
       console.log('image height = ' + imgHeight);
 
-      const pageData:string = canvas.toDataURL('image/jpeg', 1.0);
-      const s = pageData.replace('data:image/jpeg;base64,','')
-      fs.writeFileSync(`${path}/test.jpeg`, pageData.replace('data:image/jpeg;base64,',''));
+      const pageData: string = canvas.toDataURL('image/jpeg', 1.0);
+      const s = pageData.replace('data:image/jpeg;base64,', '');
+      fs.writeFileSync(
+        `${path}/test.jpeg`,
+        pageData.replace('data:image/jpeg;base64,', '')
+      );
 
       const pdf = new jsPDF('', 'pt', 'a4');
 
@@ -66,16 +70,16 @@ export default class extends React.Component<Props, State> {
       }
 
       const decode = getU8Array(pdf.output());
-      fs.writeFileSync(`${path}/${item.id}.pdf`, decode);
-      callback(item.id);
+      fs.writeFileSync(`${path}/${init.id}.pdf`, decode);
+      callback(init.id);
     });
   }
 
   render() {
     const { item } = this.props;
-
+    const { init, base } = item;
     return (
-      <div id={`print${item.id}`} className="template">
+      <div id={`print${init.id}`} className="template">
         <div className="head1">TLC个性化运动处方</div>
         {/* <BasicInformation item={item} />
         <DietPlan item={item} /> */}
@@ -161,4 +165,3 @@ const DietPlan: React.SFC<P> = ({ item }) => {
     </div>
   );
 };
-
