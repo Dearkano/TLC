@@ -1,17 +1,16 @@
-@import "./antd.css";
+@import './antd.css';
 
 body {
-  width: 595.28;
 }
 
-.row{
+.row {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
 
-.column{
+.column {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,7 +18,7 @@ body {
   flex-direction: column;
 }
 
-#login{
+#login {
   position: absolute;
   top: 0;
   left: 0;
@@ -30,57 +29,70 @@ body {
   align-items: center;
 }
 
-.template{
-  width: 100%;
+.template {
+  width: 595.28px;
+  padding-left: 90px;
+  padding-right: 90px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-variant: normal;
+  color:black;
 }
 
-.basic-module{
-  width:100%;
+.basic-module {
+  width: 100%;
   margin-bottom: 2rem;
 }
 
-.head1{
-  font-size: 1.5rem;
+.head1 {
+  font-size: 14px;
   font-weight: bolder;
   width: 100%;
   text-align: center;
   margin-bottom: 1.5rem;
 }
 
-.head2{
-  font-size: 1.2rem;
+.head2 {
+  font-size: 12px;
   font-weight: bold;
   width: 100%;
   text-align: left;
   margin-bottom: 1rem;
 }
 
-.head3{
+.head3 {
   font-weight: bold;
   text-align: left;
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
   width: 100%;
 }
 
-.text-center{
+.text-center {
   width: 100%;
   text-align: center;
 }
 
-.table-title{
-  margin-bottom:1rem;
+.table-title {
+  margin-bottom: 1rem;
 }
 
-.basic-table{
+.basic-table {
   margin-bottom: 1rem;
   width: 100%;
 }
 
-.dragger{
+.dragger {
   width: 300px;
   height: 300px;
 }
+
+.paragraph {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  word-break: break-all;
+  font-size: 10px;
+  line-height: 25px;
+}
+

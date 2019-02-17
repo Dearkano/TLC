@@ -89,10 +89,6 @@ declare module '@tlc' {
      */
     sidePhotoWithWaist: string;
     /**
-     * 评分
-     */
-    rate: number;
-    /**
      * 俯卧撑
      */
     pushUp: number;

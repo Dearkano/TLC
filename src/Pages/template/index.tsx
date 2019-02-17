@@ -4,6 +4,8 @@ import * as html2canvas from 'html2canvas';
 import { ISurvey } from '@tlc';
 import { Table } from 'antd';
 
+import Target from './target'
+
 const fs = require('fs');
 
 function getU8Array(data: any) {
@@ -24,7 +26,7 @@ interface State {}
 export default class extends React.Component<Props, State> {
   componentDidMount() {
     console.log(this.props.item);
-    this.print();
+    this.print()
   }
   print() {
     const { item, callback, path } = this.props;
@@ -42,7 +44,9 @@ export default class extends React.Component<Props, State> {
       const imgHeight = (595.28 / contentWidth) * contentHeight;
       console.log('image height = ' + imgHeight);
 
-      const pageData = canvas.toDataURL('image/jpeg', 1.0);
+      const pageData:string = canvas.toDataURL('image/jpeg', 1.0);
+      const s = pageData.replace('data:image/jpeg;base64,','')
+      fs.writeFileSync(`${path}/test.jpeg`, pageData.replace('data:image/jpeg;base64,',''));
 
       const pdf = new jsPDF('', 'pt', 'a4');
 
@@ -72,9 +76,10 @@ export default class extends React.Component<Props, State> {
 
     return (
       <div id={`print${item.id}`} className="template">
-        <div className="head1">TLC健康管理方案</div>
-        <BasicInformation item={item} />
-        <DietPlan item={item} />
+        <div className="head1">TLC个性化运动处方</div>
+        {/* <BasicInformation item={item} />
+        <DietPlan item={item} /> */}
+        <Target item={item} />
       </div>
     );
   }
@@ -156,3 +161,4 @@ const DietPlan: React.SFC<P> = ({ item }) => {
     </div>
   );
 };
+
