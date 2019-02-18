@@ -160,34 +160,133 @@ const Recipe: React.SFC<P> = ({ item }) => {
   let anaPart3 = null;
   let anAerobicExercises = null;
   if (pushUp === '较差') {
-    anaPart1 = data.anaTip1.map(i=> <div className="paragraph">{i}</div>);
+    anaPart1 = data.anaTip1.map(i => <div className="paragraph">{i}</div>);
   } else if (pushUp === '一般') {
-    anaPart1 = data.anaTip2.map(i=> <div className="paragraph">{i}</div>);
+    anaPart1 = data.anaTip2.map(i => <div className="paragraph">{i}</div>);
   } else if (pushUp === '较好') {
-    anaPart1 = data.anaTip3.map(i=> <div className="paragraph">{i}</div>);
+    anaPart1 = data.anaTip3.map(i => <div className="paragraph">{i}</div>);
   } else {
     anaPart1 = null;
   }
 
   if (rollUp === '较差') {
-    anaPart2 = data.anaTip4.map(i=> <div className="paragraph">{i}</div>);
+    anaPart2 = data.anaTip4.map(i => <div className="paragraph">{i}</div>);
   } else if (rollUp === '一般') {
-    anaPart2 = data.anaTip5.map(i=> <div className="paragraph">{i}</div>);
+    anaPart2 = data.anaTip5.map(i => <div className="paragraph">{i}</div>);
   } else if (rollUp === '较好') {
-    anaPart2 = data.anaTip6.map(i=> <div className="paragraph">{i}</div>);
+    anaPart2 = data.anaTip6.map(i => <div className="paragraph">{i}</div>);
   } else {
     anaPart2 = null;
   }
 
   if (st === '较差') {
-    anaPart3 = data.anaTip7.map(i=> <div className="paragraph">{i}</div>);
+    anaPart3 = data.anaTip7.map(i => <div className="paragraph">{i}</div>);
   } else if (st === '一般') {
-    anaPart3 = data.anaTip8.map(i=> <div className="paragraph">{i}</div>);
+    anaPart3 = data.anaTip8.map(i => <div className="paragraph">{i}</div>);
   } else if (st === '较好') {
-    anaPart3 = data.anaTip9.map(i=> <div className="paragraph">{i}</div>);
+    anaPart3 = data.anaTip9.map(i => <div className="paragraph">{i}</div>);
   } else {
     anaPart3 = null;
   }
+
+  let l1 = '';
+  let l2 = '';
+  let e1 = 0,
+    e2 = 0,
+    e3 = 0;
+  switch (pushUp) {
+    case '较差':
+      e1++;
+      break;
+    case '一般':
+      e2++;
+      break;
+    case '较好':
+      e3++;
+      break;
+  }
+  switch (rollUp) {
+    case '较差':
+      e1++;
+      break;
+    case '一般':
+      e2++;
+      break;
+    case '较好':
+      e3++;
+      break;
+  }
+  switch (st) {
+    case '较差':
+      e1++;
+      break;
+    case '一般':
+      e2++;
+      break;
+    case '较好':
+      e3++;
+      break;
+  }
+  switch (jj) {
+    case '较差':
+      e1++;
+      break;
+    case '一般':
+      e2++;
+      break;
+    case '较好':
+      e3++;
+      break;
+  }
+  switch (sr) {
+    case '较差':
+      e1++;
+      break;
+    case '一般':
+      e2++;
+      break;
+    case '较好':
+      e3++;
+      break;
+  }
+
+  if (e1 >= 3) {
+    l1 = 'K1零基础';
+  } else if (e1 === 3 && e2 === 2) {
+    l1 = 'K2初学';
+  } else if (e1 === 2 && e2 === 2 && e3 === 1) {
+    l1 = 'K2初学';
+  } else if (e1 === 2 && e2 === 1 && e3 === 2) {
+    l1 = 'K2初学';
+  } else if (e1 === 1 && e2 === 4) {
+    l1 = 'K2初学';
+  } else if (e1 === 1 && e2 === 2 && e3 === 1) {
+    l1 = 'K2初学';
+  } else if (e2 === 5) {
+    l1 = 'K2初学';
+  } else if (e1 === 2 && e3 === 3) {
+    l1 = 'K3进阶';
+  } else if (e1 === 1 && e2 === 2 && e3 === 2) {
+    l1 = 'K3进阶';
+  } else if (e1 === 1 && e2 === 1 && e3 === 3) {
+    l1 = 'K3进阶';
+  } else if (e1 === 1 && e3 === 4) {
+    l1 = 'K3进阶';
+  } else if (e2 === 4 && e3 === 1) {
+    l1 = 'K3进阶';
+  } else if (e2 === 3 && e3 === 2) {
+    l1 = 'K3进阶';
+  } else if (e2 === 2 && e3 === 3) {
+    l1 = 'K4强化';
+  } else if (e2 === 1 && e3 === 4) {
+    l1 = 'K4强化';
+  } else if (e3 === 5) {
+    l1 = 'K4强化';
+  } else {
+    l1 = '';
+  }
+
+  l2 = base.compoundExercisePreference;
   return (
     <div className="basic-module">
       <div className="head3">您目前的运动情况为：</div>
@@ -238,11 +337,26 @@ const Recipe: React.SFC<P> = ({ item }) => {
       <div className="paragraph">{anAerobicExerciseTimeTip}</div>
       <div className="head3">2、运动内容</div>
       <div className="head4">（1）上肢运动</div>
-     {anaPart1}
+      {anaPart1}
       <div className="head4">（2）下肢运动</div>
-     {anaPart3}
+      {anaPart3}
       <div className="head4">（3）核心</div>
-    {anaPart2}
+      {anaPart2}
+      <div className="head2">三、其他</div>
+      <div className="paragraph">{`根据您的实际身体情况，推荐您在keep中选择级别为${l1}的自己喜爱的其它运动。每周可以一到两次的${l2}等无氧有氧混合式运动，来替换上述有氧或无氧运动安排。`}</div>
+      {init.gender === '女' && (
+        <>
+          <div className="head2">四、经期运动注意事项</div>
+          <div className="head3">1. 适宜人群</div>
+          <div className="paragraph">{data.feTip1}</div>
+          <div className="head3">2. 运动内容</div>
+          <div className="paragraph">{data.feTip2}</div>
+          <div className="head3">3. 运动禁忌</div>
+          <div className="paragraph">{data.feTip3}</div>
+          <div className="head3">4. 其他注意要点</div>
+          <div className="paragraph">{data.feTip4}</div>
+        </>
+      )}
     </div>
   );
 };
