@@ -156,17 +156,18 @@ const Overall: React.SFC<P> = ({ item }) => {
     <div className="basic-module">
       <div className="head2">（二）整体建议</div>
       <div className="head3">一、基本运动情况</div>
-      <div className="head3">1、久坐情况：</div>
+      <div className="head4">1、久坐情况：</div>
       <div className="paragraph">{content1}</div>
       <div className="paragraph">{content2}</div>
-      <div className="head3">2、运动频率：</div>
+      <div className="head4">2、运动频率：</div>
       <div className="paragraph">{content3}</div>
-      <div className="head3">3、动机与条件克服：</div>
+      <div className="head4">3、动机与条件克服：</div>
       <div className="paragraph">{content4}</div>
-      <div className="head3">4、出行建议：</div>
+      <div className="head4">4、出行建议：</div>
       <div className="paragraph">{content5}</div>
-      <div className="head3">5、健康状况：</div>
+      <div className="head4">5、健康状况：</div>
       <div className="paragraph">{content6}</div>
+      <div className="head4">二、体态评估情况</div>
     </div>
   );
 };

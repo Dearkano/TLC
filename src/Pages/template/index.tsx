@@ -6,6 +6,7 @@ import { Table } from 'antd';
 
 import Target from './target';
 import Overall from './overall';
+import Recipe from './recipe'
 
 const fs = require('fs');
 
@@ -86,6 +87,7 @@ export default class extends React.Component<Props, State> {
         <DietPlan item={item} /> */}
         <Target item={item} />
         <Overall item={item} />
+        <Recipe item={item} />
       </div>
     );
   }
