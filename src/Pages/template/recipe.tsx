@@ -60,6 +60,134 @@ const Recipe: React.SFC<P> = ({ item }) => {
   } else {
     sr = '';
   }
+
+  let aerobicExerciseTimeTip = '';
+  let anAerobicExerciseTimeTip = '';
+  if (
+    base.weeklyExerciseNumber === '小于1次/周' ||
+    base.weeklyExerciseNumber === '1-2次/周  '
+  ) {
+    aerobicExerciseTimeTip = data.exerciseTimesTip1;
+    anAerobicExerciseTimeTip = data.exerciseTimesTip3;
+  } else if (
+    base.weeklyExerciseNumber === '5次及以上/周' ||
+    base.weeklyExerciseNumber === '3-4次/周  '
+  ) {
+    aerobicExerciseTimeTip = data.exerciseTimesTip2;
+    anAerobicExerciseTimeTip = data.exerciseTimesTip4;
+  } else {
+    aerobicExerciseTimeTip = '';
+    anAerobicExerciseTimeTip = '';
+  }
+
+  let preferenceExercises = base.aerobicPreference.split('，');
+  const exercises = preferenceExercises.map((item, index) => (
+    <>
+      <div className="paragraph">
+        {item === '快走' && (
+          <>
+            <div className="head4">快走</div>
+            {data.eTip1.map(t => (
+              <div className="paragraph">{t}</div>
+            ))}
+          </>
+        )}
+      </div>
+      <div className="paragraph">
+        {item === '跑步(椭圆机/跑步机)' && (
+          <>
+            <div className="head4">跑步(椭圆机/跑步机)</div>
+            {data.eTip2.map(t => (
+              <div className="paragraph">{t}</div>
+            ))}
+          </>
+        )}
+      </div>
+      <div className="paragraph">
+        {item === '骑车(自行车/动感单车)' && (
+          <>
+            <div className="head4">骑车(自行车/动感单车)</div>
+            {data.eTip3.map(t => (
+              <div className="paragraph">{t}</div>
+            ))}
+          </>
+        )}
+      </div>
+      <div className="paragraph">
+        {item === '游泳' && (
+          <>
+            <div className="head4">游泳</div>
+            {data.eTip4.map(t => (
+              <div className="paragraph">{t}</div>
+            ))}
+          </>
+        )}
+      </div>
+      <div className="paragraph">
+        {item === '舞蹈/健美操' && (
+          <>
+            <div className="head4">舞蹈/健美操</div>
+            {data.eTip5.map(t => (
+              <div className="paragraph">{t}</div>
+            ))}
+          </>
+        )}
+      </div>
+      <div className="paragraph">
+        {item === '太极拳/瑜伽' && (
+          <>
+            <div className="head4">太极拳/瑜伽</div>
+            {data.eTip6.map(t => (
+              <div className="paragraph">{t}</div>
+            ))}
+          </>
+        )}
+      </div>
+      <div className="paragraph">
+        {item === '跳绳' && (
+          <>
+            <div className="head4">跳绳</div>
+            {data.eTip7.map(t => (
+              <div className="paragraph">{t}</div>
+            ))}
+          </>
+        )}
+      </div>
+    </>
+  ));
+  let anaPart1 = null;
+  let anaPart2 = null;
+  let anaPart3 = null;
+  let anAerobicExercises = null;
+  if (pushUp === '较差') {
+    anaPart1 = data.anaTip1.map(i=> <div className="paragraph">{i}</div>);
+  } else if (pushUp === '一般') {
+    anaPart1 = data.anaTip2.map(i=> <div className="paragraph">{i}</div>);
+  } else if (pushUp === '较好') {
+    anaPart1 = data.anaTip3.map(i=> <div className="paragraph">{i}</div>);
+  } else {
+    anaPart1 = null;
+  }
+
+  if (rollUp === '较差') {
+    anaPart2 = data.anaTip4.map(i=> <div className="paragraph">{i}</div>);
+  } else if (rollUp === '一般') {
+    anaPart2 = data.anaTip5.map(i=> <div className="paragraph">{i}</div>);
+  } else if (rollUp === '较好') {
+    anaPart2 = data.anaTip6.map(i=> <div className="paragraph">{i}</div>);
+  } else {
+    anaPart2 = null;
+  }
+
+  if (st === '较差') {
+    anaPart3 = data.anaTip7.map(i=> <div className="paragraph">{i}</div>);
+  } else if (st === '一般') {
+    anaPart3 = data.anaTip8.map(i=> <div className="paragraph">{i}</div>);
+  } else if (st === '较好') {
+    anaPart3 = data.anaTip9.map(i=> <div className="paragraph">{i}</div>);
+  } else {
+    anaPart3 = null;
+  }
   return (
     <div className="basic-module">
       <div className="head3">您目前的运动情况为：</div>
@@ -95,6 +223,26 @@ const Recipe: React.SFC<P> = ({ item }) => {
           <td>{sr}</td>
         </tr>
       </table>
+      <div className="paragraph">
+        建议采用有氧运动和无氧运动相结合的运动整体方案。
+      </div>
+      <div className="head2">一、有氧运动</div>
+      <div className="head3">1、运动频率和时间</div>
+      <div className="paragraph">{aerobicExerciseTimeTip}</div>
+      <div className="head3">2、运动内容</div>
+      {exercises}
+
+      <div className="head2">二、无氧运动</div>
+      <div className="paragraph">{data.actionTip}</div>
+      <div className="head3">1、运动频率和时间</div>
+      <div className="paragraph">{anAerobicExerciseTimeTip}</div>
+      <div className="head3">2、运动内容</div>
+      <div className="head4">（1）上肢运动</div>
+     {anaPart1}
+      <div className="head4">（2）下肢运动</div>
+     {anaPart3}
+      <div className="head4">（3）核心</div>
+    {anaPart2}
     </div>
   );
 };
