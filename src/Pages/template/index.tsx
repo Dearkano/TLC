@@ -5,6 +5,7 @@ import { ISurvey, IData } from '@tlc';
 import { Table } from 'antd';
 
 import Target from './target';
+import Overall from './overall';
 
 const fs = require('fs');
 
@@ -84,6 +85,7 @@ export default class extends React.Component<Props, State> {
         {/* <BasicInformation item={item} />
         <DietPlan item={item} /> */}
         <Target item={item} />
+        <Overall item={item} />
       </div>
     );
   }

@@ -23,7 +23,7 @@ export default class extends React.Component<Props, State> {
       data: [],
       renderOver: [],
       filepath1: './input/chushi.xls',
-      filepath2: './input/jixian.xls',
+      filepath2: './input/jixian1.xls',
       disable: false,
       outputPath: './output',
       mode: 'preview'
@@ -141,7 +141,7 @@ export default class extends React.Component<Props, State> {
                 <p className="ant-upload-text">点击或拖拽文件到这里</p>
               </Dragger>
             </div>
-            {data && (
+            {data.length!==0 && (
               <Template
                 key={data[0].init.id}
                 item={data[0]}
