@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Upload, Icon, message, Button, Progress, Divider } from 'antd';
 import RecipeTemplate from './recipeTemplate';
 import ReportTemplate from './reportTemplate';
-import { readBase, readInitData } from '../Utils/xlsx';
-import { ISurvey, IBase, IData } from '@tlc';
+import { readBase, readInitData, readAddition } from '../Utils/xlsx';
+import { IData } from '@tlc';
 const Dragger = Upload.Dragger;
 
 interface Props {}
@@ -12,6 +12,7 @@ interface State {
   renderOver: boolean[];
   filepath1: string;
   filepath2: string;
+  filepath3: string;
   disable: boolean;
   outputPath: string;
   mode: 'preview' | 'production';
@@ -25,6 +26,7 @@ export default class extends React.Component<Props, State> {
       renderOver: [],
       filepath1: './input/chushi.xls',
       filepath2: './input/jixian1.xls',
+      filepath3: './input/addition.xls',
       disable: false,
       outputPath: './output',
       mode: 'preview'
@@ -34,8 +36,9 @@ export default class extends React.Component<Props, State> {
     const data: IData[] = [];
     const init = readInitData(this.state.filepath1);
     const base = readBase(this.state.filepath2);
+    const addition = readAddition(this.state.filepath3);
     for (const i in init) {
-      data[i] = { init: init[i], base: base[i] };
+      data[i] = { init: init[i], base: base[i], addition: addition[i] };
     }
     this.setState({ data });
   }
@@ -48,8 +51,9 @@ export default class extends React.Component<Props, State> {
     const data: IData[] = [];
     const init = readInitData(this.state.filepath1);
     const base = readBase(this.state.filepath2);
+    const addition = readAddition(this.state.filepath3);
     for (const i in init) {
-      data[i] = { init: init[i], base: base[i] };
+      data[i] = { init: init[i], base: base[i], addition: addition[i] };
     }
     const renderOver: boolean[] = [];
     for (const i in init) {

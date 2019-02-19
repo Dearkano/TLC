@@ -1,13 +1,16 @@
 import * as React from 'react';
 import data from '../../data/recipe/overall';
 import { ISurvey, IData } from '@tlc';
+import { readFile } from '../../../out/make/tlc.app/Contents/Resources/app/src/Utils/xlsx';
+
+const fs = require('fs');
 
 interface P {
   item: IData;
 }
 
 const Overall: React.SFC<P> = ({ item }) => {
-  const { init, base } = item;
+  const { init, base, addition } = item;
   let content1 = '';
   let content2 = null;
 
@@ -24,7 +27,7 @@ const Overall: React.SFC<P> = ({ item }) => {
   } else {
     content1 = '无';
   }
-  content2 = data.tips.map(item => <div className="paragraoh">{item}</div>);
+  content2 = data.tips.map(item => <div className="paragraph">{item}</div>);
   let content3 = '';
   if (base.weeklyExerciseNumber === '1-2次/周  ') {
     content3 = data.content6;
@@ -151,6 +154,10 @@ const Overall: React.SFC<P> = ({ item }) => {
   if (!content6valid) {
     content6 = <div className="paragraph">{data.syTip1}</div>;
   }
+  const frontPhoto = fs
+    .readFileSync('./input/image/郑霜-正面.png')
+    .toString('base64');
+  const eTips = data.eTip.map(i => <div className="paragraph">{i}</div>);
 
   return (
     <div className="basic-module">
@@ -168,6 +175,21 @@ const Overall: React.SFC<P> = ({ item }) => {
       <div className="head4">5、健康状况：</div>
       <div className="paragraph">{content6}</div>
       <div className="head4">二、体态评估情况</div>
+      <img src={`data:image/png;base64,${frontPhoto}`} />
+      <div className="paragraph">经过评估，您的体态<b>{addition.evaluation}</b></div>
+      {eTips}
+      {addition.evaluation.includes('骨盆前倾') && (
+        <div className="paragraph">{data.eTip1}</div>
+      )}
+      {addition.evaluation.includes('颈前伸') && (
+        <div className="paragraph">{data.eTip2}</div>
+      )}
+      {addition.evaluation.includes('驼背圆肩') && (
+        <div className="paragraph">{data.eTip3}</div>
+      )}
+      {addition.evaluation.includes('足内翻') && (
+        <div className="paragraph">{data.eTip4}</div>
+      )}
     </div>
   );
 };

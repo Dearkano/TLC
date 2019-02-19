@@ -141,6 +141,7 @@ export function readBase(filepath: string) {
 export function readAddition(filepath: string) {
   const workSheets: IXlsx[] = xlsx.parse(filepath);
   let stringArray = workSheets[0].data;
+  console.log(stringArray)
   stringArray.splice(0, 1);
   const data: IAddition[] = [];
   const properties = [
