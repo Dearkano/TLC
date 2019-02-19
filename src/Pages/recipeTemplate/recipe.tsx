@@ -1,5 +1,5 @@
 import * as React from 'react';
-import data from '../../data/recipe';
+import data from '../../data/recipe/recipe';
 import { IData } from '@tlc';
 
 interface P {

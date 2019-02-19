@@ -1,5 +1,5 @@
 import xlsx from 'node-xlsx';
-import { IXlsx, ISurvey, IBase } from '@tlc';
+import { IXlsx, ISurvey, IBase, IAddition } from '@tlc';
 import { message } from 'antd';
 
 export function readInitData(filepath: string) {
@@ -25,7 +25,7 @@ export function readInitData(filepath: string) {
     'fatRate',
     'VAT',
     'visceralFatRate',
-    'restingEneryguComsumption',
+    'restingEnergyComsumption',
     'frontPhoto',
     'frontPhotoWithWaist',
     'sidePhoto',
@@ -59,7 +59,6 @@ export function readBase(filepath: string) {
   const workSheets: IXlsx[] = xlsx.parse(filepath);
   let stringArray = workSheets[0].data;
   stringArray.splice(0, 2);
-  console.log(stringArray);
   const data: IBase[] = [];
   const properties = [
     'id',
@@ -135,6 +134,46 @@ export function readBase(filepath: string) {
       obj[properties[j]] = stringArray[i][j];
     }
     data.push(obj as IBase);
+  }
+  return data;
+}
+
+export function readAddition(filepath: string) {
+  const workSheets: IXlsx[] = xlsx.parse(filepath);
+  let stringArray = workSheets[0].data;
+  stringArray.splice(0, 1);
+  const data: IAddition[] = [];
+  const properties = [
+    'id',
+    'name',
+    'evaluation',
+    'totalEnergy',
+    'protein',
+    'carbohydrate',
+    'fat',
+    'tip1',
+    'tip2',
+    'tip3',
+    'habit4',
+    'habit5',
+    'habit6',
+    'potato',
+    'fruit',
+    'meat',
+    'bean',
+    'milk',
+    'nut',
+    'oil',
+    'total',
+    'frontPhoto',
+    'sidePhoto'
+  ];
+  for (const i in stringArray) {
+    const obj = {};
+    for (const j in stringArray[i]) {
+      obj[properties[j]] = stringArray[i][j];
+    }
+    data.push(obj as IAddition);
   }
   return data;
 }

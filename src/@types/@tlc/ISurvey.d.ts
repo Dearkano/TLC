@@ -45,7 +45,7 @@ declare module '@tlc' {
      */
     weight: number;
     /**
-     * 28天目标
+     * 28天体重目标
      */
     target28days: string;
     /**

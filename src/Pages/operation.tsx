@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Upload, Icon, message, Button, Progress, Divider } from 'antd';
-import Template from './template';
+import RecipeTemplate from './recipeTemplate';
+import ReportTemplate from './reportTemplate';
 import { readBase, readInitData } from '../Utils/xlsx';
 import { ISurvey, IBase, IData } from '@tlc';
 const Dragger = Upload.Dragger;
@@ -141,13 +142,21 @@ export default class extends React.Component<Props, State> {
                 <p className="ant-upload-text">点击或拖拽文件到这里</p>
               </Dragger>
             </div>
-            {data.length!==0 && (
-              <Template
-                key={data[0].init.id}
-                item={data[0]}
-                path={outputPath}
-                callback={this.destory}
-              />
+            {data.length !== 0 && (
+              <>
+                <RecipeTemplate
+                  key={data[0].init.id}
+                  item={data[0]}
+                  path={outputPath}
+                  callback={this.destory}
+                />
+                {/* <ReportTemplate
+                  key={data[0].init.id}
+                  item={data[0]}
+                  path={outputPath}
+                  callback={this.destory}
+                /> */}
+              </>
             )}
           </>
         )}
@@ -194,7 +203,7 @@ export default class extends React.Component<Props, State> {
 
             <div style={{ height: 0, overflow: 'hidden' }}>
               {data.map(item => (
-                <Template
+                <RecipeTemplate
                   key={item.init.id}
                   item={item}
                   path={outputPath}
