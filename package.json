@@ -51,6 +51,7 @@
     "@types/react": "16.7.21",
     "@types/react-dom": "16.0.11",
     "antd": "^3.13.0",
+    "echarts": "^4.1.0",
     "electron-compile": "^6.4.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-squirrel-startup": "^1.0.0",

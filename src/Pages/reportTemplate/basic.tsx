@@ -11,7 +11,7 @@ const Basic: React.SFC<P> = ({ item }) => {
   console.log(init);
   return (
     <div className="basic-module">
-      <div className="head2">一、基本信息</div>
+      <div className="head2">(一) 基本信息</div>
       <div className="head3 center">基础信息</div>
       <table className="e1-table">
         <tr>

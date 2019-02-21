@@ -5,6 +5,7 @@ import { ISurvey, IData } from '@tlc';
 
 import BasicInformation from './basic';
 import DietPlan from './dietPlan';
+import Overall from './overall';
 
 const fs = require('fs');
 
@@ -82,6 +83,7 @@ export default class extends React.Component<Props, State> {
       <div id={`print${init.id}`} className="template">
         <div className="head1">TLC个性化运动处方</div>
         <BasicInformation item={item} />
+        <Overall item={item} />
         <DietPlan item={item} />
       </div>
     );

@@ -155,7 +155,10 @@ const Overall: React.SFC<P> = ({ item }) => {
     content6 = <div className="paragraph">{data.syTip1}</div>;
   }
   const frontPhoto = fs
-    .readFileSync('./input/image/郑霜-正面.png')
+    .readFileSync(`./input/image/${addition.name}-正面.png`)
+    .toString('base64');
+  const sidePhoto = fs
+    .readFileSync(`./input/image/${addition.name}-侧面.png`)
     .toString('base64');
   const eTips = data.eTip.map(i => <div className="paragraph">{i}</div>);
 
@@ -176,7 +179,10 @@ const Overall: React.SFC<P> = ({ item }) => {
       <div className="paragraph">{content6}</div>
       <div className="head4">二、体态评估情况</div>
       <img src={`data:image/png;base64,${frontPhoto}`} />
-      <div className="paragraph">经过评估，您的体态<b>{addition.evaluation}</b></div>
+      <img src={`data:image/png;base64,${sidePhoto}`} />
+      <div className="paragraph">
+        经过评估，您的体态<b>{addition.evaluation}</b>
+      </div>
       {eTips}
       {addition.evaluation.includes('骨盆前倾') && (
         <div className="paragraph">{data.eTip1}</div>

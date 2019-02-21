@@ -148,18 +148,18 @@ export default class extends React.Component<Props, State> {
             </div>
             {data.length !== 0 && (
               <>
-                <RecipeTemplate
-                  key={data[0].init.id}
-                  item={data[0]}
-                  path={outputPath}
-                  callback={this.destory}
-                />
-                {/* <ReportTemplate
+                {/* <RecipeTemplate
                   key={data[0].init.id}
                   item={data[0]}
                   path={outputPath}
                   callback={this.destory}
                 /> */}
+                <ReportTemplate
+                  key={data[0].init.id}
+                  item={data[0]}
+                  path={outputPath}
+                  callback={this.destory}
+                />
               </>
             )}
           </>

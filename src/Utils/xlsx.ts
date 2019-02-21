@@ -159,6 +159,7 @@ export function readAddition(filepath: string) {
     'habit5',
     'habit6',
     'potato',
+    'vegetable',
     'fruit',
     'meat',
     'bean',
