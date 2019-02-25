@@ -15,6 +15,7 @@ interface State {
   filepath3: string;
   disable: boolean;
   outputPath: string;
+  imagesPath: string;
   mode: 'preview' | 'production';
 }
 
@@ -24,26 +25,33 @@ export default class extends React.Component<Props, State> {
     this.state = {
       data: [],
       renderOver: [],
-      filepath1: './input/chushi.xls',
-      filepath2: './input/jixian1.xls',
-      filepath3: './input/addition.xls',
+      // filepath1: './input/chushi.xls',
+      // filepath2: './input/jixian1.xls',
+      // filepath3: './input/addition.xls',
+      // imagesPath: './input/images',
+      // outputPath: './output',
+      filepath1: '',
+      filepath2: '',
+      filepath3: '',
+      imagesPath: '',
+      outputPath: '',
       disable: false,
-      outputPath: './output',
-      mode: 'preview'
+      mode: 'production'
     };
   }
   componentDidMount() {
-    const data: IData[] = [];
-    const init = readInitData(this.state.filepath1);
-    const base = readBase(this.state.filepath2);
-    const addition = readAddition(this.state.filepath3);
-    for (const i in init) {
-      data[i] = { init: init[i], base: base[i], addition: addition[i] };
-    }
-    this.setState({ data });
+    // const data: IData[] = [];
+    // const init = readInitData(this.state.filepath1);
+    // const base = readBase(this.state.filepath2);
+    // const addition = readAddition(this.state.filepath3);
+    // for (const i in init) {
+    //   data[i] = { init: init[i], base: base[i], addition: addition[i] };
+    // }
+    // this.setState({ data });
   }
   print() {
     const { filepath1 } = this.state;
+    this.setState({ disable: true });
     if (!filepath1) {
       message.error('请输入文件后再生成报告');
       return;
@@ -60,7 +68,7 @@ export default class extends React.Component<Props, State> {
       renderOver[i] = false;
     }
     this.setState({ data: [], renderOver: [] }, () =>
-      this.setState({ data, renderOver })
+      this.setState({ data, renderOver, disable: false })
     );
   }
 
@@ -80,15 +88,65 @@ export default class extends React.Component<Props, State> {
       if (filepath.indexOf('xls') === -1) {
         message.error(`${info.file.name} 文件格式错误.`);
       } else {
-        if (this.state.outputPath) {
-          this.setState({ filepath1: filepath, disable: false });
-        } else {
-          this.setState({ filepath1: filepath });
-        }
+        this.setState({ filepath1: filepath });
+
         message.success(`${info.file.name} 文件上传成功.`);
       }
     } else if (status === 'error') {
       message.error(`${info.file.name} 文件上传失败.`);
+    }
+  };
+  onXls2Change = (info: any) => {
+    const filepath = info.file.originFileObj.path;
+    const status = info.file.status;
+    if (status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (status === 'done') {
+      if (filepath.indexOf('xls') === -1) {
+        message.error(`${info.file.name} 文件格式错误.`);
+      } else {
+        this.setState({ filepath2: filepath });
+
+        message.success(`${info.file.name} 文件上传成功.`);
+      }
+    } else if (status === 'error') {
+      message.error(`${info.file.name} 文件上传失败.`);
+    }
+  };
+
+  onXls3Change = (info: any) => {
+    const filepath = info.file.originFileObj.path;
+    const status = info.file.status;
+    if (status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (status === 'done') {
+      if (filepath.indexOf('xls') === -1) {
+        message.error(`${info.file.name} 文件格式错误.`);
+      } else {
+        this.setState({ filepath3: filepath });
+
+        message.success(`${info.file.name} 文件上传成功.`);
+      }
+    } else if (status === 'error') {
+      message.error(`${info.file.name} 文件上传失败.`);
+    }
+  };
+
+  onImagesChange = (info: any) => {
+    const filepath = info.file.originFileObj.path;
+    console.log(info);
+    const status = info.file.status;
+    if (status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (status === 'done') {
+      this.setState({ imagesPath: filepath });
+
+      message.success(`${info.file.name} 路径选择成功.`);
+    } else if (status === 'error') {
+      message.error(`${info.file.name} 路径选择失败.`);
     }
   };
 
@@ -100,12 +158,7 @@ export default class extends React.Component<Props, State> {
       console.log(info.file, info.fileList);
     }
     if (status === 'done') {
-      if (this.state.filepath1) {
-        this.setState({ outputPath: filepath, disable: false });
-      } else {
-        this.setState({ outputPath: filepath });
-      }
-      this.setState({ outputPath: filepath, disable: false });
+      this.setState({ outputPath: filepath });
       message.success(`${info.file.name} 路径选择成功.`);
     } else if (status === 'error') {
       message.error(`${info.file.name} 路径选择失败.`);
@@ -113,38 +166,53 @@ export default class extends React.Component<Props, State> {
   };
 
   render() {
-    const { data, renderOver, disable, outputPath, mode } = this.state;
+    const {
+      data,
+      renderOver,
+      disable,
+      outputPath,
+      mode,
+      filepath1,
+      filepath2,
+      filepath3,
+      imagesPath
+    } = this.state;
     let count = 0;
     for (const item of renderOver) {
       if (item === true) {
         count++;
       }
     }
-
+    const progress =
+      renderOver.length === 0 ? 0 : (count * 100) / (renderOver.length - 1);
+    let btn = false;
+    if (
+      filepath1 &&
+      filepath2 &&
+      filepath3 &&
+      outputPath &&
+      imagesPath &&
+      !disable
+    ) {
+      btn = true;
+    }
     return (
-      <div className="column">
-        <Button
-          style={{ marginBottom: '1rem', marginTop: '1rem' }}
-          type="primary"
-          onClick={() =>
-            this.setState({
-              mode: mode === 'preview' ? 'production' : 'preview',
-              data: []
-            })
-          }
-        >
-          {mode === 'preview' ? '切换到输出模式' : '切换到预览模式'}
-        </Button>
-
+      <div className="column" style={{ marginTop: '30px' }}>
         {mode === 'preview' && (
           <>
             <div className="dragger">
-              <Dragger name="file" onChange={this.onXls1Change}>
-                <p className="ant-upload-drag-icon">
-                  <Icon type="inbox" />
-                </p>
-                <p className="ant-upload-text">点击或拖拽文件到这里</p>
-              </Dragger>
+              <Button
+                style={{ marginBottom: '1rem', marginTop: '1rem' }}
+                type="primary"
+                onClick={() =>
+                  this.setState({
+                    mode: 'production',
+                    data: []
+                  })
+                }
+              >
+                切换到输出模式
+              </Button>
             </div>
             {data.length !== 0 && (
               <>
@@ -157,7 +225,8 @@ export default class extends React.Component<Props, State> {
                 <ReportTemplate
                   key={data[0].init.id}
                   item={data[0]}
-                  path={outputPath}
+                  outputPath={outputPath}
+                  imagesPath={imagesPath}
                   callback={this.destory}
                 />
               </>
@@ -173,7 +242,23 @@ export default class extends React.Component<Props, State> {
                   <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                   </p>
-                  <p className="ant-upload-text">点击或拖拽文件到这里</p>
+                  <p className="ant-upload-text">输入初始数据</p>
+                </Dragger>
+              </div>
+              <div className="dragger">
+                <Dragger name="file" onChange={this.onXls1Change}>
+                  <p className="ant-upload-drag-icon">
+                    <Icon type="inbox" />
+                  </p>
+                  <p className="ant-upload-text">输入基线问卷</p>
+                </Dragger>
+              </div>
+              <div className="dragger">
+                <Dragger name="file" onChange={this.onXls1Change}>
+                  <p className="ant-upload-drag-icon">
+                    <Icon type="inbox" />
+                  </p>
+                  <p className="ant-upload-text">输入营养师数据</p>
                 </Dragger>
               </div>
               <div className="dragger">
@@ -181,27 +266,62 @@ export default class extends React.Component<Props, State> {
                   <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                   </p>
-                  <p className="ant-upload-text">选择目标文件夹</p>
+                  <p className="ant-upload-text">选择图片文件夹</p>
                 </Dragger>
+              </div>
+            </div>
+
+            <div className="row" style={{ marginTop: '50px' }}>
+              <div
+                style={{
+                  flexGrow: 1,
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <div className="dragger">
+                  <Dragger name="file" onChange={this.onOutputChange} directory>
+                    <p className="ant-upload-drag-icon">
+                      <Icon type="inbox" />
+                    </p>
+                    <p className="ant-upload-text">选择目标文件夹</p>
+                  </Dragger>
+                </div>
+              </div>
+              <div
+                style={{
+                  flexGrow: 1,
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
+              >
+                <Progress type="circle" percent={progress} />
               </div>
             </div>
             <div
               className="row"
-              style={{ justifyContent: 'space-around', marginTop: '20px' }}
+              style={{ marginTop: '20px', justifyContent: 'center' }}
             >
               <Button
-                disabled={disable}
+                disabled={btn}
                 type="primary"
                 onClick={() => this.print()}
+                style={{ marginRight: '50px' }}
               >
                 生成
               </Button>
-              {data.length !== 0 && (
-                <Progress
-                  type="circle"
-                  percent={(count * 100) / (renderOver.length - 1)}
-                />
-              )}
+              <Button
+                style={{ marginBottom: '1rem', marginTop: '1rem' }}
+                type="primary"
+                onClick={() =>
+                  this.setState({
+                    mode: 'preview',
+                    data: []
+                  })
+                }
+              >
+                预览
+              </Button>
             </div>
             <Divider />
 
@@ -210,7 +330,8 @@ export default class extends React.Component<Props, State> {
                 <RecipeTemplate
                   key={item.init.id}
                   item={item}
-                  path={outputPath}
+                  outputPath={outputPath}
+                  imagesPath={imagesPath}
                   callback={this.destory}
                 />
               ))}

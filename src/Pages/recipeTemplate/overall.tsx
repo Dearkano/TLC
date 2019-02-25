@@ -7,9 +7,10 @@ const fs = require('fs');
 
 interface P {
   item: IData;
+  imagesPath: string;
 }
 
-const Overall: React.SFC<P> = ({ item }) => {
+const Overall: React.SFC<P> = ({ item, imagesPath }) => {
   const { init, base, addition } = item;
   let content1 = '';
   let content2 = null;
@@ -155,10 +156,10 @@ const Overall: React.SFC<P> = ({ item }) => {
     content6 = <div className="paragraph">{data.syTip1}</div>;
   }
   const frontPhoto = fs
-    .readFileSync(`./input/image/${addition.name}-正面.png`)
+    .readFileSync(`${imagesPath}/${addition.name}-正面.png`)
     .toString('base64');
   const sidePhoto = fs
-    .readFileSync(`./input/image/${addition.name}-侧面.png`)
+    .readFileSync(`${imagesPath}/${addition.name}-侧面.png`)
     .toString('base64');
   const eTips = data.eTip.map(i => <div className="paragraph">{i}</div>);
 

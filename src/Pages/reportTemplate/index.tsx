@@ -19,7 +19,8 @@ function getU8Array(data: any) {
 interface Props {
   item: IData;
   callback: (id: number) => void;
-  path: string;
+  outputPath: string;
+  imagesPath: string;
 }
 
 interface State {}
@@ -30,7 +31,7 @@ export default class extends React.Component<Props, State> {
     this.print();
   }
   print() {
-    const { item, callback, path } = this.props;
+    const { item, callback, outputPath,imagesPath } = this.props;
     const { init, base } = item;
     html2canvas(document.getElementById(`print${init.id}`)).then(function(
       canvas: any
@@ -47,11 +48,6 @@ export default class extends React.Component<Props, State> {
       console.log('image height = ' + imgHeight);
 
       const pageData: string = canvas.toDataURL('image/jpeg', 1.0);
-      const s = pageData.replace('data:image/jpeg;base64,', '');
-      fs.writeFileSync(
-        `${path}/test.jpeg`,
-        pageData.replace('data:image/jpeg;base64,', '')
-      );
 
       const pdf = new jsPDF('', 'pt', 'a4');
 
@@ -71,7 +67,7 @@ export default class extends React.Component<Props, State> {
       }
 
       const decode = getU8Array(pdf.output());
-      fs.writeFileSync(`${path}/report${init.id}.pdf`, decode);
+      fs.writeFileSync(`${outputPath}/report${init.id}.pdf`, decode);
       callback(init.id);
     });
   }
