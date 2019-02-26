@@ -1,6 +1,9 @@
 import * as React from 'react';
 import data from '../../data/recipe/target';
 import { ISurvey, IData } from '@tlc';
+import { Timeline } from 'antd';
+
+const fs = require('fs');
 
 interface P {
   item: IData;
@@ -54,14 +57,70 @@ const Target: React.SFC<P> = ({ item }) => {
     content1 = data.content6;
   }
 
+  const bg1 = fs.readFileSync(`./src/images/bg1.png`).toString('base64');
+  const head = fs.readFileSync(`./src/images/head.png`).toString('base64');
+  const titlePhoto = fs
+    .readFileSync(`./src/images/titleDec.png`)
+    .toString('base64');
   return (
-    <div className="basic-module">
-      <div>{init.name}</div>
-      <div className="head2">（一）目标</div>
-      <div className="head3">1. 减脂</div>
-      {content}
-      <div className="head3">2. 腰围减少{waistline}cm</div>
-      <div className="paragraph">{content1}</div>
+    <div id={`recipe-${init.id}-1`} className="template">
+      <div
+        className="basic-module"
+        style={{
+          marginTop: '100px'
+        }}
+      >
+        <div className="row" style={{ height: 40, marginBottom: '1.5rem' }}>
+          <img
+            style={{ height: 40, marginLeft: 60 }}
+            src={`data:image/png;base64,${titlePhoto}`}
+          />
+          <div
+            className="head1 center"
+            style={{ height: '100%', lineHeight: '40px', marginBottom: 0 }}
+          >
+            TLC个性化运动处方
+          </div>
+          <img
+            style={{ height: 40, marginRight: 60 }}
+            src={`data:image/png;base64,${titlePhoto}`}
+          />
+        </div>
+        <div
+          style={{
+            backgroundImage: `url(data:image/png;base64,${bg1})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            marginRight: '-30px',
+            marginLeft: '-30px',
+            paddingLeft: '30px',
+            paddingRight: '30px'
+          }}
+        >
+          <img
+            style={{ width: '400px' }}
+            src={`data:image/png;base64,${head}`}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              marginTop: '-140px',
+              fontSize: '14px',
+              color: 'white',
+              marginLeft: '50px',
+              fontWeight: 'bolder'
+            }}
+          >
+            {init.name}
+          </div>
+
+          <div className="head2">（一）目标</div>
+          <div className="head3">1. 减脂</div>
+          {content}
+          <div className="head3">2. 腰围减少{waistline}cm</div>
+          <div className="paragraph">{content1}</div>
+        </div>
+      </div>
     </div>
   );
 };

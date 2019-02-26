@@ -33,7 +33,7 @@ export default class extends React.Component<Props, State> {
   print() {
     const { item, callback, outputPath,imagesPath } = this.props;
     const { init, base } = item;
-    html2canvas(document.getElementById(`print${init.id}`)).then(function(
+    html2canvas(document.getElementById(`report${init.id}`)).then(function(
       canvas: any
     ) {
       const contentWidth = canvas.width;
@@ -76,7 +76,7 @@ export default class extends React.Component<Props, State> {
     const { item } = this.props;
     const { init, base } = item;
     return (
-      <div id={`print${init.id}`} className="template">
+      <div id={`report${init.id}`} className="template">
         <div className="head1">TLC个性化运动处方</div>
         <BasicInformation item={item} />
         <Overall item={item} />

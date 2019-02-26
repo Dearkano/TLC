@@ -25,41 +25,41 @@ export default class extends React.Component<Props, State> {
     this.state = {
       data: [],
       renderOver: [],
-      // filepath1: './input/chushi.xls',
-      // filepath2: './input/jixian1.xls',
-      // filepath3: './input/addition.xls',
-      // imagesPath: './input/images',
-      // outputPath: './output',
-      filepath1: '',
-      filepath2: '',
-      filepath3: '',
-      imagesPath: '',
-      outputPath: '',
+      filepath1: './input/chushi.xls',
+      filepath2: './input/jixian1.xls',
+      filepath3: './input/addition.xls',
+      imagesPath: './input/images',
+      outputPath: './output',
+      // filepath1: '',
+      // filepath2: '',
+      // filepath3: '',
+      // imagesPath: '',
+      // outputPath: '',
       disable: false,
-      mode: 'production'
+      mode: 'preview'
     };
   }
   componentDidMount() {
-    // const data: IData[] = [];
-    // const init = readInitData(this.state.filepath1);
-    // const base = readBase(this.state.filepath2);
-    // const addition = readAddition(this.state.filepath3);
-    // for (const i in init) {
-    //   data[i] = { init: init[i], base: base[i], addition: addition[i] };
-    // }
-    // this.setState({ data });
+    const data: IData[] = [];
+    const init = readInitData(this.state.filepath1);
+    const base = readBase(this.state.filepath2);
+    const addition = readAddition(this.state.filepath3);
+    for (const i in init) {
+      data[i] = { init: init[i], base: base[i], addition: addition[i] };
+    }
+    this.setState({ data });
   }
   print() {
-    const { filepath1 } = this.state;
+    const { filepath1, filepath2, filepath3 } = this.state;
     this.setState({ disable: true });
     if (!filepath1) {
       message.error('请输入文件后再生成报告');
       return;
     }
     const data: IData[] = [];
-    const init = readInitData(this.state.filepath1);
-    const base = readBase(this.state.filepath2);
-    const addition = readAddition(this.state.filepath3);
+    const init = readInitData(filepath1);
+    const base = readBase(filepath2);
+    const addition = readAddition(filepath3);
     for (const i in init) {
       data[i] = { init: init[i], base: base[i], addition: addition[i] };
     }
@@ -216,19 +216,20 @@ export default class extends React.Component<Props, State> {
             </div>
             {data.length !== 0 && (
               <>
-                {/* <RecipeTemplate
-                  key={data[0].init.id}
-                  item={data[0]}
-                  path={outputPath}
-                  callback={this.destory}
-                /> */}
-                <ReportTemplate
+                <RecipeTemplate
                   key={data[0].init.id}
                   item={data[0]}
                   outputPath={outputPath}
                   imagesPath={imagesPath}
                   callback={this.destory}
                 />
+                {/* <ReportTemplate
+                  key={data[0].init.id}
+                  item={data[0]}
+                  outputPath={outputPath}
+                  imagesPath={imagesPath}
+                  callback={this.destory}
+                /> */}
               </>
             )}
           </>
@@ -246,7 +247,7 @@ export default class extends React.Component<Props, State> {
                 </Dragger>
               </div>
               <div className="dragger">
-                <Dragger name="file" onChange={this.onXls1Change}>
+                <Dragger name="file" onChange={this.onXls2Change}>
                   <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                   </p>
@@ -254,7 +255,7 @@ export default class extends React.Component<Props, State> {
                 </Dragger>
               </div>
               <div className="dragger">
-                <Dragger name="file" onChange={this.onXls1Change}>
+                <Dragger name="file" onChange={this.onXls3Change}>
                   <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                   </p>
@@ -262,7 +263,7 @@ export default class extends React.Component<Props, State> {
                 </Dragger>
               </div>
               <div className="dragger">
-                <Dragger name="file" onChange={this.onOutputChange} directory>
+                <Dragger name="file" onChange={this.onImagesChange} directory>
                   <p className="ant-upload-drag-icon">
                     <Icon type="inbox" />
                   </p>
@@ -303,7 +304,7 @@ export default class extends React.Component<Props, State> {
               style={{ marginTop: '20px', justifyContent: 'center' }}
             >
               <Button
-                disabled={btn}
+                disabled={!btn}
                 type="primary"
                 onClick={() => this.print()}
                 style={{ marginRight: '50px' }}
@@ -328,6 +329,15 @@ export default class extends React.Component<Props, State> {
             <div style={{ height: 0, overflow: 'hidden' }}>
               {data.map(item => (
                 <RecipeTemplate
+                  key={item.init.id}
+                  item={item}
+                  outputPath={outputPath}
+                  imagesPath={imagesPath}
+                  callback={this.destory}
+                />
+              ))}
+              {data.map(item => (
+                <ReportTemplate
                   key={item.init.id}
                   item={item}
                   outputPath={outputPath}

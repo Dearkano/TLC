@@ -13,7 +13,8 @@ interface P {
 const Overall: React.SFC<P> = ({ item, imagesPath }) => {
   const { init, base, addition } = item;
   let content1 = '';
-  let content2 = null;
+  let content21 = null;
+  let content22 = null;
 
   if (base.sittingTime === '3小时以下') {
     content1 = data.content1;
@@ -28,7 +29,8 @@ const Overall: React.SFC<P> = ({ item, imagesPath }) => {
   } else {
     content1 = '无';
   }
-  content2 = data.tips.map(item => <div className="paragraph">{item}</div>);
+  content21 = data.tips1.map(item => <div className="paragraph">{item}</div>);
+  content22 = data.tips2.map(item => <div className="paragraph">{item}</div>);
   let content3 = '';
   if (base.weeklyExerciseNumber === '1-2次/周  ') {
     content3 = data.content6;
@@ -168,8 +170,8 @@ const Overall: React.SFC<P> = ({ item, imagesPath }) => {
       <div className="head2">（二）整体建议</div>
       <div className="head3">一、基本运动情况</div>
       <div className="head4">1、久坐情况：</div>
-      <div className="paragraph">{content1}</div>
-      <div className="paragraph">{content2}</div>
+      <div className="paragraph">{content21}</div>
+      <div className="paragraph">{content22}</div>
       <div className="head4">2、运动频率：</div>
       <div className="paragraph">{content3}</div>
       <div className="head4">3、动机与条件克服：</div>
