@@ -67,7 +67,7 @@ const Target: React.SFC<P> = ({ item }) => {
       <div
         className="basic-module"
         style={{
-          marginTop: '100px'
+          marginTop: '70px'
         }}
       >
         <div className="row" style={{ height: 40, marginBottom: '1.5rem' }}>
@@ -91,10 +91,11 @@ const Target: React.SFC<P> = ({ item }) => {
             backgroundImage: `url(data:image/png;base64,${bg1})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
-            marginRight: '-30px',
+            marginRight: '-40px',
             marginLeft: '-30px',
             paddingLeft: '30px',
-            paddingRight: '30px'
+            paddingRight: '40px',
+            paddingBottom: '50px'
           }}
         >
           <img

@@ -29,8 +29,36 @@ const Overall: React.SFC<P> = ({ item, imagesPath }) => {
   } else {
     content1 = '无';
   }
-  content21 = data.tips1.map(item => <div className="paragraph">{item}</div>);
-  content22 = data.tips2.map(item => <div className="paragraph">{item}</div>);
+
+  const tipBg1 = fs.readFileSync(`./src/images/tip1.png`).toString('base64');
+  const tipBg2 = fs.readFileSync(`./src/images/tip2.png`).toString('base64');
+  const bg1 = fs.readFileSync(`./src/images/bg1.png`).toString('base64');
+  const bg2 = fs.readFileSync(`./src/images/bg2.png`).toString('base64');
+
+  content21 = data.tips1.map((item, index) => (
+    <div
+      className={`paragraph ${index % 2 === 0 ? 'tip1' : 'tip2'}`}
+      style={{
+        backgroundImage: `url(data:image/png;base64,${
+          index % 2 === 0 ? tipBg1 : tipBg2
+        })`
+      }}
+    >
+      {item}
+    </div>
+  ));
+  content22 = data.tips2.map((item, index) => (
+    <div
+      className={`paragraph ${index % 2 === 0 ? 'tip1' : 'tip2'}`}
+      style={{
+        backgroundImage: `url(data:image/png;base64,${
+          index % 2 === 0 ? tipBg1 : tipBg2
+        })`
+      }}
+    >
+      {item}
+    </div>
+  ));
   let content3 = '';
   if (base.weeklyExerciseNumber === '1-2次/周  ') {
     content3 = data.content6;
@@ -163,43 +191,168 @@ const Overall: React.SFC<P> = ({ item, imagesPath }) => {
   const sidePhoto = fs
     .readFileSync(`${imagesPath}/${addition.name}-侧面.png`)
     .toString('base64');
+  const icon1 = fs.readFileSync(`./src/images/icon1.png`).toString('base64');
   const eTips = data.eTip.map(i => <div className="paragraph">{i}</div>);
 
   return (
-    <div className="basic-module">
-      <div className="head2">（二）整体建议</div>
-      <div className="head3">一、基本运动情况</div>
-      <div className="head4">1、久坐情况：</div>
-      <div className="paragraph">{content21}</div>
-      <div className="paragraph">{content22}</div>
-      <div className="head4">2、运动频率：</div>
-      <div className="paragraph">{content3}</div>
-      <div className="head4">3、动机与条件克服：</div>
-      <div className="paragraph">{content4}</div>
-      <div className="head4">4、出行建议：</div>
-      <div className="paragraph">{content5}</div>
-      <div className="head4">5、健康状况：</div>
-      <div className="paragraph">{content6}</div>
-      <div className="head4">二、体态评估情况</div>
-      <img src={`data:image/png;base64,${frontPhoto}`} />
-      <img src={`data:image/png;base64,${sidePhoto}`} />
-      <div className="paragraph">
-        经过评估，您的体态<b>{addition.evaluation}</b>
+    <>
+      <div id={`recipe-${init.id}-2`} className="template">
+        <div
+          className="basic-module"
+          style={{
+            marginTop: '70px'
+          }}
+        >
+          <div className="head2">（二）整体建议</div>
+          <div
+            className="head3"
+            style={{ color: '#5f7f41', fontWeight: 'bolder' }}
+          >
+            基本运动情况
+          </div>
+          <div className="row">
+            <img
+              style={{ width: '80px' }}
+              src={`data:image/png;base64,${icon1}`}
+            />
+            <div className="head4" style={{ color: '#5f7f41' }}>
+              久坐情况
+            </div>
+          </div>
+          <div className="paragraph">{content1}</div>
+          <div className="paragraph">{content21}</div>
+        </div>
       </div>
-      {eTips}
-      {addition.evaluation.includes('骨盆前倾') && (
-        <div className="paragraph">{data.eTip1}</div>
-      )}
-      {addition.evaluation.includes('颈前伸') && (
-        <div className="paragraph">{data.eTip2}</div>
-      )}
-      {addition.evaluation.includes('驼背圆肩') && (
-        <div className="paragraph">{data.eTip3}</div>
-      )}
-      {addition.evaluation.includes('足内翻') && (
-        <div className="paragraph">{data.eTip4}</div>
-      )}
-    </div>
+      <div id={`recipe-${init.id}-3`} className="template">
+        <div
+          className="basic-module"
+          style={{
+            marginTop: '70px'
+          }}
+        >
+          <div className="paragraph">{content22}</div>
+        </div>
+      </div>
+      <div id={`recipe-${init.id}-4`} className="template">
+        <div
+          className="basic-module"
+          style={{
+            marginTop: '70px'
+          }}
+        >
+          <div
+            style={{
+              backgroundImage: `url(data:image/png;base64,${bg2})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              marginRight: '-30px',
+              marginLeft: '-30px',
+              paddingLeft: '30px',
+              paddingRight: '30px',
+              paddingBottom: '150px'
+            }}
+          >
+            <div className="row">
+              <img
+                style={{ width: '80px' }}
+                src={`data:image/png;base64,${icon1}`}
+              />
+              <div className="head4" style={{ color: '#5f7f41' }}>
+                运动频率
+              </div>
+            </div>
+            <div className="paragraph">{content3}</div>
+            <div className="row">
+              <img
+                style={{ width: '80px' }}
+                src={`data:image/png;base64,${icon1}`}
+              />
+              <div className="head4" style={{ color: '#5f7f41' }}>
+                动机与条件克服
+              </div>
+            </div>
+            <div className="paragraph">{content4}</div>
+            <div className="row">
+              <img
+                style={{ width: '80px' }}
+                src={`data:image/png;base64,${icon1}`}
+              />
+              <div className="head4" style={{ color: '#5f7f41' }}>
+                出行建议
+              </div>
+            </div>
+            <div className="paragraph">{content5}</div>
+            <div className="row">
+              <img
+                style={{ width: '80px' }}
+                src={`data:image/png;base64,${icon1}`}
+              />
+              <div className="head4" style={{ color: '#5f7f41' }}>
+                健康状况
+              </div>
+            </div>
+            <div className="paragraph">{content6}</div>
+          </div>
+        </div>
+      </div>
+      <div id={`recipe-${init.id}-5`} className="template">
+        <div
+          className="basic-module"
+          style={{
+            marginTop: '70px'
+          }}
+        >
+          <div
+            style={{
+              backgroundImage: `url(data:image/png;base64,${bg1})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              marginRight: '-50px',
+              marginLeft: '-30px',
+              paddingLeft: '30px',
+              paddingRight: '50px',
+              paddingBottom: '40px',
+              paddingTop: '10px'
+            }}
+          >
+            <div
+              className="head3"
+              style={{
+                color: '#5f7f41',
+                fontWeight: 'bolder',
+                textAlign: 'center'
+              }}
+            >
+              体态评估情况
+            </div>
+            <img
+              style={{ width: '150px' }}
+              src={`data:image/png;base64,${frontPhoto}`}
+            />
+            <img
+              style={{ width: '150px', marginLeft: '100px' }}
+              src={`data:image/png;base64,${sidePhoto}`}
+            />
+            <div className="paragraph">
+              经过评估，您的体态<b>{addition.evaluation}</b>
+            </div>
+            {eTips}
+            {addition.evaluation.includes('骨盆前倾') && (
+              <div className="paragraph">{data.eTip1}</div>
+            )}
+            {addition.evaluation.includes('颈前伸') && (
+              <div className="paragraph">{data.eTip2}</div>
+            )}
+            {addition.evaluation.includes('驼背圆肩') && (
+              <div className="paragraph">{data.eTip3}</div>
+            )}
+            {addition.evaluation.includes('足内翻') && (
+              <div className="paragraph">{data.eTip4}</div>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -24,63 +24,63 @@ interface Props {
   imagesPath: string;
 }
 
-interface State {
-  current: number;
-}
+interface State {}
 
 export default class extends React.Component<Props, State> {
-  state = {
-    current: 1
-  };
+  state = {};
   componentDidMount() {
     console.log(this.props.item);
     this.print();
   }
 
-  async h2c(pdf: any, id: string) {
+  async h2c(pdf: any, ele: any) {
     const { init } = this.props.item;
-    const { current } = this.state;
     const that = this;
-    let cur = current;
-    const canvas = await html2canvas(document.getElementById(id));
+    const canvas = await html2canvas(ele);
     const contentWidth = canvas.width;
     const contentHeight = canvas.height;
     const pageHeight = (contentWidth / 595.28) * 841.89;
     let leftHeight = contentHeight;
-    let position = 0;
     const imgWidth = 595.28;
     const imgHeight = (595.28 / contentWidth) * contentHeight;
     const pageData: string = canvas.toDataURL('image/jpeg', 1.0);
 
-    if (leftHeight < pageHeight) {
-      pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
-    } else {
-      while (leftHeight > 0) {
-        pdf.addImage(
-          pageData,
-          'JPEG',
-          0,
-          position + 20 * current,
-          imgWidth,
-          imgHeight
-        );
-        leftHeight -= pageHeight;
-        position -= 841.89;
-        //避免添加空白页
-        if (leftHeight > 0) {
-          pdf.addPage();
-        }
-        cur++;
-      }
-    }
-    that.setState({ current: cur });
+    // if (leftHeight < pageHeight) {
+    //   pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+    // } else {
+    //   while (leftHeight > 0) {
+    //     pdf.addImage(
+    //       pageData,
+    //       'JPEG',
+    //       0,
+    //       position + 20 * current,
+    //       imgWidth,
+    //       imgHeight
+    //     );
+    //     leftHeight -= pageHeight;
+    //     pos -= 841.89;
+    //     //避免添加空白页
+    //     if (leftHeight > 0) {
+    //       pdf.addPage();
+    //     }
+    //     cur++;
+    //   }
+    // }
+
+    pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
   }
 
   async print() {
     const { item, callback, outputPath, imagesPath } = this.props;
     const { init, base } = item;
     const pdf = new jsPDF('', 'pt', 'a4');
-    await this.h2c(pdf, `recipe-${init.id}-1`);
+    const eles = document.getElementsByClassName('template');
+    for (const i in eles) {
+      await this.h2c(pdf, eles[i]);
+      if (parseInt(i) !== eles.length - 1) {
+      }
+      pdf.addPage();
+    }
     const decode = getU8Array(pdf.output());
     fs.writeFileSync(`${outputPath}/recipe${init.id}.pdf`, decode);
     callback(init.id);
@@ -88,9 +88,9 @@ export default class extends React.Component<Props, State> {
 
   render() {
     const { item, imagesPath } = this.props;
-    const { init, base } = item;
+    // const { init, base } = item;
     return (
-      <div id={`recipe${init.id}`} className="template">
+      <div>
         <Target item={item} />
         <Overall imagesPath={imagesPath} item={item} />
         <Recipe item={item} />

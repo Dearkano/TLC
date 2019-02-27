@@ -1,9 +1,8 @@
 @import './antd.css';
 
 body {
-  font-family: 宋体
+  font-family: 宋体;
 }
-
 
 .row {
   display: flex;
@@ -148,14 +147,37 @@ body {
   width: 100px;
 }
 
-.e1-table-c4{
+.e1-table-c4 {
   width: 150px;
 }
 
-.e1-table-3c4{
+.e1-table-3c4 {
   width: 450px;
 }
 .center {
   text-align: center;
   width: 100%;
+}
+
+.tip1 {
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 9rem;
+  margin-left: -80px;
+  padding-left: 160px;
+  padding-top: 35px;
+  margin-right: -30px;
+  padding-right: 100px;
+}
+
+.tip2 {
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 9rem;
+  margin-right: -170px;
+  margin-top: -50px;
+  margin-bottom: -40px;
+  padding-top: 40px;
+  padding-right: 250px;
+  padding-left: 20px;
 }
