@@ -12,7 +12,7 @@ const fs = require('fs');
 function getU8Array(data: any) {
   let len = data.length;
   const u8 = new Uint8Array(len);
-  while (len--) u8[len] = data.charCodeAt(len);
+  while (len--) { u8[len] = data.charCodeAt(len); }
   return u8;
 }
 
@@ -23,17 +23,18 @@ interface Props {
   imagesPath: string;
 }
 
-interface State {}
+interface State { }
 
 export default class extends React.Component<Props, State> {
   componentDidMount() {
-    console.log(this.props.item);
+   console.log
     this.print();
   }
   print() {
-    const { item, callback, outputPath,imagesPath } = this.props;
+    const { item, callback, outputPath } = this.props;
     const { init, base } = item;
-    html2canvas(document.getElementById(`report${init.id}`)).then(function(
+    console.log('print report for ' + init.name)
+    html2canvas(document.getElementById(`report${init.id}`)).then(function (
       canvas: any
     ) {
       const contentWidth = canvas.width;
@@ -69,6 +70,7 @@ export default class extends React.Component<Props, State> {
       const decode = getU8Array(pdf.output());
       fs.writeFileSync(`${outputPath}/report${init.id}.pdf`, decode);
       callback(init.id);
+      console.log('print report for ' + init.name)
     });
   }
 

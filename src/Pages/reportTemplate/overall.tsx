@@ -51,7 +51,6 @@ const Overall: React.SFC<P> = ({ item }) => {
     <div className="paragraph">{i}</div>
   ));
 
-
   return (
     <div className="basic-module">
       <div className="head2">（二）整体建议</div>

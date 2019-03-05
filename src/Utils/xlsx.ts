@@ -9,7 +9,6 @@ export function readInitData(filepath: string) {
   console.log(stringArray);
   const properties = [
     'id',
-    'serial',
     'name',
     'gender',
     'age',
@@ -62,7 +61,6 @@ export function readBase(filepath: string) {
   const data: IBase[] = [];
   const properties = [
     'id',
-    'serial',
     'name',
     'gender',
     'age',
@@ -122,7 +120,7 @@ export function readBase(filepath: string) {
     'uricAcid',
     'renalFunction',
     'otherDisease',
-    'medicalExaminationReport',
+    'medicalExaminatioReport',
     'doYouWorryAboutYourWeight',
     'haveYouEverBeenOnExcessiveDiet',
     'haveYouEverZuoSi',

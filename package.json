@@ -55,6 +55,7 @@
     "electron-compile": "^6.4.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-squirrel-startup": "^1.0.0",
+    "exif": "^0.6.0",
     "html2canvas": "1.0.0-alpha.12",
     "jspdf": "1.5.3",
     "node-xlsx": "^0.12.1",

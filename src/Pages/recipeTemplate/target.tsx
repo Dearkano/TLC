@@ -56,14 +56,18 @@ const Target: React.SFC<P> = ({ item }) => {
     waistline = Math.round(init.waistline * 0.04);
     content1 = data.content6;
   }
-
+  const back5 = fs.readFileSync(`./src/images/back5.png`).toString('base64');
   const bg1 = fs.readFileSync(`./src/images/bg1.png`).toString('base64');
   const head = fs.readFileSync(`./src/images/head.png`).toString('base64');
   const titlePhoto = fs
     .readFileSync(`./src/images/titleDec.png`)
     .toString('base64');
   return (
-    <div id={`recipe-${init.id}-1`} className="template">
+    <div id={`recipe-${init.id}-1`} className="template"  style={{
+      backgroundImage: `url(data:image/png;base64,${back5})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover'
+    }}>
       <div
         className="basic-module"
         style={{
@@ -87,16 +91,6 @@ const Target: React.SFC<P> = ({ item }) => {
           />
         </div>
         <div
-          style={{
-            backgroundImage: `url(data:image/png;base64,${bg1})`,
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            marginRight: '-40px',
-            marginLeft: '-30px',
-            paddingLeft: '30px',
-            paddingRight: '40px',
-            paddingBottom: '50px'
-          }}
         >
           <img
             style={{ width: '400px' }}
@@ -108,7 +102,7 @@ const Target: React.SFC<P> = ({ item }) => {
               marginTop: '-140px',
               fontSize: '14px',
               color: 'white',
-              marginLeft: '50px',
+              marginLeft: '43px',
               fontWeight: 'bolder'
             }}
           >

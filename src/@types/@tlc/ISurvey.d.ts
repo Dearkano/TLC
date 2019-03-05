@@ -5,10 +5,6 @@ declare module '@tlc' {
      */
     id: number;
     /**
-     * 编号
-     */
-    serial: string;
-    /**
      * 姓名
      */
     name: string;

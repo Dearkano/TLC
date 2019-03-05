@@ -7,13 +7,14 @@ import { Table } from 'antd';
 import Target from './target';
 import Overall from './overall';
 import Recipe from './recipe';
+import { needConvertImage } from '../../Utils/img'
 
 const fs = require('fs');
 
 function getU8Array(data: any) {
   let len = data.length;
   const u8 = new Uint8Array(len);
-  while (len--) u8[len] = data.charCodeAt(len);
+  while (len--) { u8[len] = data.charCodeAt(len); }
   return u8;
 }
 
@@ -24,13 +25,67 @@ interface Props {
   imagesPath: string;
 }
 
-interface State {}
+interface State {
+  front: number;
+  side: number;
+}
 
 export default class extends React.Component<Props, State> {
-  state = {};
-  componentDidMount() {
-    console.log(this.props.item);
-    this.print();
+  state: State = {
+    front: 0,
+    side: 0
+  }
+  async componentDidMount() {
+    const { item, imagesPath } = this.props
+    const { init, base, addition } = item;
+    let frontPhoto = ''
+    let frontNeedRotate = 0;
+    let sideNeedRotate = 0;
+    try {
+      frontPhoto = fs
+        .readFileSync(`${imagesPath}/${addition.name}/正面.jpg`)
+        .toString('base64');
+      frontNeedRotate = await needConvertImage(`${imagesPath}/${addition.name}/正面.jpg`)
+    } catch {
+      try {
+        frontPhoto = fs
+          .readFileSync(`${imagesPath}/${addition.name}/正面.jpeg`)
+          .toString('base64');
+        frontNeedRotate = await needConvertImage(`${imagesPath}/${addition.name}/正面.jpeg`)
+        console.log('===================================')
+        console.log(frontNeedRotate)
+      } catch {
+        frontPhoto = fs
+          .readFileSync(`${imagesPath}/${addition.name}/正面.png`)
+          .toString('base64');
+        frontNeedRotate = await needConvertImage(`${imagesPath}/${addition.name}/正面.png`)
+      }
+    }
+    let sidePhoto = ''
+    try {
+      sidePhoto = fs
+        .readFileSync(`${imagesPath}/${addition.name}/侧面.jpg`)
+        .toString('base64');
+      sideNeedRotate = await needConvertImage(`${imagesPath}/${addition.name}/侧面.jpg`)
+    } catch {
+      try {
+        sidePhoto = fs
+          .readFileSync(`${imagesPath}/${addition.name}/侧面.jpeg`)
+          .toString('base64');
+        sideNeedRotate = await needConvertImage(`${imagesPath}/${addition.name}/侧面.jpg`)
+      } catch {
+        sidePhoto = fs
+          .readFileSync(`${imagesPath}/${addition.name}/侧面.png`)
+          .toString('base64');
+        sideNeedRotate = await needConvertImage(`${imagesPath}/${addition.name}/侧面.png`)
+      }
+    }
+    console.log('===================================')
+    console.log('===================================')
+    console.log('===================================')
+    console.log(frontNeedRotate)
+    this.setState({ front: frontNeedRotate, side: sideNeedRotate }, () => this.print())
+
   }
 
   async h2c(pdf: any, ele: any) {
@@ -71,28 +126,34 @@ export default class extends React.Component<Props, State> {
   }
 
   async print() {
+
     const { item, callback, outputPath, imagesPath } = this.props;
     const { init, base } = item;
+    console.log('print recipe for ' + init.name)
     const pdf = new jsPDF('', 'pt', 'a4');
     const eles = document.getElementsByClassName('template');
-    for (const i in eles) {
+    console.log(eles)
+    for (let i = 0; i < eles.length; i++) {
+      console.log('now i = ' + i)
       await this.h2c(pdf, eles[i]);
-      if (parseInt(i) !== eles.length - 1) {
+      if (i !== eles.length - 1) {
+        pdf.addPage();
       }
-      pdf.addPage();
     }
     const decode = getU8Array(pdf.output());
-    fs.writeFileSync(`${outputPath}/recipe${init.id}.pdf`, decode);
+    fs.writeFileSync(`${outputPath}/${init.name}.pdf`, decode);
     callback(init.id);
+    console.log('print recipe over for ' + init.name)
   }
 
   render() {
     const { item, imagesPath } = this.props;
+    const { front, side } = this.state
     // const { init, base } = item;
     return (
       <div>
         <Target item={item} />
-        <Overall imagesPath={imagesPath} item={item} />
+        <Overall imagesPath={imagesPath} item={item} front={front} side={side} />
         <Recipe item={item} />
       </div>
     );

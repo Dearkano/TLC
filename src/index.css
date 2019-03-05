@@ -32,11 +32,12 @@ body {
 
 .template {
   width: 595.28px;
+  height: 841.89px;
   padding-left: 90px;
   padding-right: 90px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding-top: 40px;
   align-items: center;
   font-variant: normal;
   color: black;
@@ -121,6 +122,7 @@ body {
   border: 1px solid #000;
   width: 100px;
   text-align: center;
+  padding: 5px;
 }
 
 .e1-table {
@@ -137,6 +139,7 @@ body {
 .e1-table td {
   border: 1px solid #000;
   text-align: center;
+  padding: 5px;
 }
 
 .e1-table-c5 {

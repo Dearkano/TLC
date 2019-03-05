@@ -23,7 +23,7 @@ export default Form.create<Props>()(
         const response = GlobalState.login(values.userName, values.password);
         console.log(response);
         if (response) {
-         
+//
         } else {
           this.setState({ tip: '用户名或密码错误！' });
         }

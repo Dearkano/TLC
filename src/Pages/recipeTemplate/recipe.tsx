@@ -128,6 +128,7 @@ const Recipe: React.SFC<P> = ({ item }) => {
   let page2 = null;
   let page3 = null;
   let page4 = null;
+  const back5 = fs.readFileSync(`./src/images/back5.png`).toString('base64');
   // count = 1 不分页
   // count = 2,3 分1一页
   const aerobicIcon = fs
@@ -145,11 +146,14 @@ const Recipe: React.SFC<P> = ({ item }) => {
     .toString('base64');
   if (count >= 1) {
     page1 = (
-      <div id={`recipe-${init.id}-7`} className="template">
+      <div id={`recipe-${init.id}-7`} className="template" style={{
+        backgroundImage: `url(data:image/png;base64,${back5})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+      }}>
         <div
           className="basic-module"
           style={{
-            marginTop: '70px'
           }}
         >
           <div className="row" style={{ height: '40px', marginBottom: '1rem' }}>
@@ -190,11 +194,14 @@ const Recipe: React.SFC<P> = ({ item }) => {
   if (count >= 2) {
     page2 = (
       <>
-        <div id={`recipe-${init.id}-8`} className="template">
+        <div id={`recipe-${init.id}-8`} className="template" style={{
+          backgroundImage: `url(data:image/png;base64,${back5})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover'
+        }}>
           <div
             className="basic-module"
             style={{
-              marginTop: count === 2 ? '150px' : '70px'
             }}
           >
             {getExerciseWay(matches[1], projects.indexOf(matches[1]))}
@@ -209,11 +216,14 @@ const Recipe: React.SFC<P> = ({ item }) => {
   if (count >= 4) {
     page3 = (
       <>
-        <div id={`recipe-${init.id}-9`} className="template">
+        <div id={`recipe-${init.id}-9`} className="template" style={{
+          backgroundImage: `url(data:image/png;base64,${back5})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover'
+        }}>
           <div
             className="basic-module"
             style={{
-              marginTop: count === 4 ? '150px' : '70px'
             }}
           >
             {getExerciseWay(matches[3], projects.indexOf(matches[3]))}
@@ -228,11 +238,14 @@ const Recipe: React.SFC<P> = ({ item }) => {
   if (count >= 6) {
     page4 = (
       <>
-        <div id={`recipe-${init.id}-10`} className="template">
+        <div id={`recipe-${init.id}-10`} className="template" style={{
+          backgroundImage: `url(data:image/png;base64,${back5})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover'
+        }}>
           <div
             className="basic-module"
             style={{
-              marginTop: count === 6 ? '150px' : '70px'
             }}
           >
             {getExerciseWay(matches[5], projects.indexOf(matches[5]))}
@@ -454,25 +467,18 @@ const Recipe: React.SFC<P> = ({ item }) => {
   const bg3 = fs.readFileSync(`./src/images/bg3.png`).toString('base64');
   return (
     <>
-      <div id={`recipe-${init.id}-6`} className="template">
+      <div id={`recipe-${init.id}-6`} className="template" style={{
+        backgroundImage: `url(data:image/png;base64,${back5})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+      }}>
         <div
           className="basic-module"
           style={{
-            marginTop: '150px'
           }}
         >
           <div
-            style={{
-              backgroundImage: `url(data:image/png;base64,${bg3})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              marginLeft: '-150px',
-              marginRight: '-50px',
-              paddingLeft: '200px',
-              paddingRight: '50px',
-              paddingBottom: '100px',
-              paddingTop: '50px'
-            }}
+
           >
             <div className="head2">（三）运动处方</div>
             <div className="head3">您目前的运动情况为：</div>
@@ -534,26 +540,17 @@ const Recipe: React.SFC<P> = ({ item }) => {
       {page3}
       {page4}
 
-      <div id={`recipe-${init.id}-11`} className="template">
+      <div id={`recipe-${init.id}-11`} className="template" style={{
+        backgroundImage: `url(data:image/png;base64,${back5})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+      }}>
         <div
           className="basic-module"
           style={{
-            marginTop: '40px'
           }}
         >
-          <div
-            style={{
-              backgroundImage: `url(data:image/png;base64,${bg4})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              marginRight: '-80px',
-              marginLeft: '-150px',
-              paddingLeft: '220px',
-              paddingRight: '30px',
-              paddingBottom: '90px',
-              paddingTop: '60px'
-            }}
-          >
+          <div >
             <div
               className="row"
               style={{ height: '40px', marginBottom: '1rem' }}
@@ -620,7 +617,18 @@ const Recipe: React.SFC<P> = ({ item }) => {
                 下肢运动
               </div>
             </div>
-            {anaPart3}
+            {anaPart3}</div></div></div>
+      <div id={`recipe-${init.id}-16`} className="template" style={{
+        backgroundImage: `url(data:image/png;base64,${back5})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+      }}>
+        <div
+          className="basic-module"
+          style={{
+          }}
+        >
+          <div >
             <div className="row" style={{ height: '20px' }}>
               <img
                 style={{ width: '20px' }}
@@ -642,7 +650,11 @@ const Recipe: React.SFC<P> = ({ item }) => {
         </div>
       </div>
 
-      <div id={`recipe-${init.id}-11`} className="template">
+      <div id={`recipe-${init.id}-15`} className="template" style={{
+        backgroundImage: `url(data:image/png;base64,${back5})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover'
+      }}>
         <div
           className="basic-module"
           style={{
@@ -650,17 +662,6 @@ const Recipe: React.SFC<P> = ({ item }) => {
           }}
         >
           <div
-            style={{
-              backgroundImage: `url(data:image/png;base64,${bg4})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: 'cover',
-              marginRight: '-80px',
-              marginLeft: '-150px',
-              paddingLeft: '220px',
-              paddingRight: '80px',
-              paddingBottom: '120px',
-              paddingTop: '60px'
-            }}
           >
             <div
               className="row"

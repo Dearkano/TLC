@@ -6,7 +6,7 @@ import { readBase, readInitData, readAddition } from '../Utils/xlsx';
 import { IData } from '@tlc';
 const Dragger = Upload.Dragger;
 
-interface Props {}
+interface Props { }
 interface State {
   data: IData[];
   renderOver: boolean[];
@@ -16,6 +16,7 @@ interface State {
   disable: boolean;
   outputPath: string;
   imagesPath: string;
+  current: number;
   mode: 'preview' | 'production';
 }
 
@@ -25,9 +26,9 @@ export default class extends React.Component<Props, State> {
     this.state = {
       data: [],
       renderOver: [],
-      filepath1: './input/chushi.xls',
-      filepath2: './input/jixian1.xls',
-      filepath3: './input/addition.xls',
+      filepath1: './input/init.xls',
+      filepath2: './input/base.xls',
+      filepath3: './input/addition.xlsx',
       imagesPath: './input/images',
       outputPath: './output',
       // filepath1: '',
@@ -36,18 +37,31 @@ export default class extends React.Component<Props, State> {
       // imagesPath: '',
       // outputPath: '',
       disable: false,
-      mode: 'preview'
+      mode: 'production',
+      current: 0
     };
   }
   componentDidMount() {
-    const data: IData[] = [];
-    const init = readInitData(this.state.filepath1);
-    const base = readBase(this.state.filepath2);
-    const addition = readAddition(this.state.filepath3);
-    for (const i in init) {
-      data[i] = { init: init[i], base: base[i], addition: addition[i] };
+    if (this.state.mode === 'preview') {
+      const data: IData[] = [];
+      const init = readInitData(this.state.filepath1);
+      const base = readBase(this.state.filepath2);
+      const addition = readAddition(this.state.filepath3);
+      for (const i of init) {
+        for (const j of base) {
+          if (i.name === j.name) {
+            for (const k of addition) {
+              if (j.name === k.name) {
+                //data[i.id] = { init: i, base: j, addition: k };
+                data.push({ init: i, base: j, addition: k })
+                break;
+              }
+            }
+          }
+        }
+      }
+      this.setState({ data });
     }
-    this.setState({ data });
   }
   print() {
     const { filepath1, filepath2, filepath3 } = this.state;
@@ -60,22 +74,36 @@ export default class extends React.Component<Props, State> {
     const init = readInitData(filepath1);
     const base = readBase(filepath2);
     const addition = readAddition(filepath3);
-    for (const i in init) {
-      data[i] = { init: init[i], base: base[i], addition: addition[i] };
+    console.log(init)
+    console.log(base)
+    console.log(addition)
+    for (const i of init) {
+      for (const j of base) {
+        if (i.name === j.name) {
+          for (const k of addition) {
+            if (j.name === k.name) {
+              //data[i.id] = { init: i, base: j, addition: k };
+              data.push({ init: i, base: j, addition: k })
+              break;
+            }
+          }
+        }
+      }
     }
+    console.log(data)
     const renderOver: boolean[] = [];
     for (const i in init) {
       renderOver[i] = false;
     }
     this.setState({ data: [], renderOver: [] }, () =>
-      this.setState({ data, renderOver, disable: false })
+      this.setState({ data, renderOver, disable: false, current: 0 })
     );
   }
 
   destory = (id: number) => {
     const renderOver = this.state.renderOver;
     renderOver[id] = true;
-    this.setState({ renderOver });
+    this.setState({ renderOver, current: this.state.current + 1 });
   };
 
   onXls1Change = (info: any) => {
@@ -175,7 +203,8 @@ export default class extends React.Component<Props, State> {
       filepath1,
       filepath2,
       filepath3,
-      imagesPath
+      imagesPath,
+      current
     } = this.state;
     let count = 0;
     for (const item of renderOver) {
@@ -326,8 +355,8 @@ export default class extends React.Component<Props, State> {
             </div>
             <Divider />
 
-            <div style={{ height: 0, overflow: 'hidden' }}>
-              {data.map(item => (
+            <div style={{}}>
+              {/* {data.map(item => (
                 <RecipeTemplate
                   key={item.init.id}
                   item={item}
@@ -344,7 +373,17 @@ export default class extends React.Component<Props, State> {
                   imagesPath={imagesPath}
                   callback={this.destory}
                 />
-              ))}
+              ))} */}
+              <>
+                {data[current] &&
+                  <RecipeTemplate
+                    key={data[current].init.id}
+                    item={data[current]}
+                    outputPath={outputPath}
+                    imagesPath={imagesPath}
+                    callback={this.destory}
+                  />}
+              </>
             </div>
           </>
         )}
