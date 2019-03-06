@@ -63,60 +63,49 @@ const Target: React.SFC<P> = ({ item }) => {
     .readFileSync(`./src/images/titleDec.png`)
     .toString('base64');
   return (
-    <div id={`recipe-${init.id}-1`} className="template"  style={{
-      backgroundImage: `url(data:image/png;base64,${back5})`,
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover'
-    }}>
-      <div
-        className="basic-module"
-        style={{
-          marginTop: '70px'
-        }}
-      >
-        <div className="row" style={{ height: 40, marginBottom: '1.5rem' }}>
-          <img
-            style={{ height: 40, marginLeft: 60 }}
-            src={`data:image/png;base64,${titlePhoto}`}
-          />
-          <div
-            className="head1 center"
-            style={{ height: '100%', lineHeight: '40px', marginBottom: 0 }}
-          >
-            TLC个性化运动处方
-          </div>
-          <img
-            style={{ height: 40, marginRight: 60 }}
-            src={`data:image/png;base64,${titlePhoto}`}
-          />
-        </div>
+    <>
+      <div className="row" style={{ height: 40, marginBottom: '1.5rem' }}>
+        <img
+          style={{ height: 40, marginLeft: 60 }}
+          src={`data:image/png;base64,${titlePhoto}`}
+        />
         <div
+          className="head1 center"
+          style={{ height: '100%', lineHeight: '40px', marginBottom: 0 }}
         >
-          <img
-            style={{ width: '400px' }}
-            src={`data:image/png;base64,${head}`}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              marginTop: '-140px',
-              fontSize: '14px',
-              color: 'white',
-              marginLeft: '43px',
-              fontWeight: 'bolder'
-            }}
-          >
-            {init.name}
+          TLC个性化运动处方
           </div>
-
-          <div className="head2">（一）目标</div>
-          <div className="head3">1. 减脂</div>
-          {content}
-          <div className="head3">2. 腰围减少{waistline}cm</div>
-          <div className="paragraph">{content1}</div>
-        </div>
+        <img
+          style={{ height: 40, marginRight: 60 }}
+          src={`data:image/png;base64,${titlePhoto}`}
+        />
       </div>
-    </div>
+      <div
+      >
+        <img
+          style={{ width: '400px' }}
+          src={`data:image/png;base64,${head}`}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            marginTop: '-140px',
+            fontSize: '14px',
+            color: 'white',
+            marginLeft: '43px',
+            fontWeight: 'bolder'
+          }}
+        >
+          {init.name}
+        </div>
+
+        <div className="head2">（一）目标</div>
+        <div className="head3">1. 减脂</div>
+        {content}
+        <div className="head3">2. 腰围减少{waistline}cm</div>
+        <div className="paragraph">{content1}</div>
+      </div>
+    </>
   );
 };
 
