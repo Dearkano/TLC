@@ -245,20 +245,20 @@ export default class extends React.Component<Props, State> {
             </div>
             {data.length !== 0 && (
               <>
-                <RecipeTemplate
-                  key={data[0].init.id}
-                  item={data[0]}
-                  outputPath={outputPath}
-                  imagesPath={imagesPath}
-                  callback={this.destory}
-                />
-                {/* <ReportTemplate
+                {/* <RecipeTemplate
                   key={data[0].init.id}
                   item={data[0]}
                   outputPath={outputPath}
                   imagesPath={imagesPath}
                   callback={this.destory}
                 /> */}
+                <ReportTemplate
+                  key={data[0].init.id}
+                  item={data[0]}
+                  outputPath={outputPath}
+                  imagesPath={imagesPath}
+                  callback={this.destory}
+                />
               </>
             )}
           </>
@@ -375,8 +375,16 @@ export default class extends React.Component<Props, State> {
                 />
               ))} */}
               <>
-                {data[current] &&
+                {/* {data[current] &&
                   <RecipeTemplate
+                    key={data[current].init.id}
+                    item={data[current]}
+                    outputPath={outputPath}
+                    imagesPath={imagesPath}
+                    callback={this.destory}
+                  />} */}
+                {data[current] &&
+                  <ReportTemplate
                     key={data[current].init.id}
                     item={data[current]}
                     outputPath={outputPath}

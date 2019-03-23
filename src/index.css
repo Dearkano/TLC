@@ -3,6 +3,7 @@
 body {
   font-family: 宋体;
   font-variant: normal;
+  
 }
 
 .row {
@@ -48,7 +49,7 @@ body {
 }
 
 .head1 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bolder;
   width: 100%;
   text-align: left;
@@ -56,18 +57,20 @@ body {
 }
 
 .head2 {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bolder;
   width: 100%;
   text-align: left;
   margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
 }
 
 .head3 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   width: 100%;
   text-align: left;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -76,7 +79,7 @@ body {
   text-align: left;
   margin-bottom: 10px;
   width: 100%;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .text-center {
@@ -104,13 +107,13 @@ body {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   word-break: break-all;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 25px;
 }
 
 .e-table {
   border: 1px solid #000;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .e-table tr {
@@ -126,13 +129,13 @@ body {
 
 .e1-table {
   border: 1px solid #000;
-  font-size: 10px;
+  font-size: 12px;
   width: 100%;
   margin-top: 10px;
 }
 
 .e1-table tr {
-  border: 1px solid #000;
+
 }
 
 .e1-table td {
@@ -183,3 +186,21 @@ body {
   padding-right: 250px;
   padding-left: 20px;
 }
+
+.reference{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  font-size: 12px;
+  width: 100%;
+  font-weight: bold;
+}
+
+.r-title{
+  width: 100%;
+}
+
+.r-author{
+  width: 100%;
+}
+

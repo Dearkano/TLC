@@ -53,8 +53,6 @@ export default class extends React.Component<Props, State> {
           .readFileSync(`${imagesPath}/${addition.name}/正面.jpeg`)
           .toString('base64');
         frontNeedRotate = await needConvertImage(`${imagesPath}/${addition.name}/正面.jpeg`)
-        console.log('===================================')
-        console.log(frontNeedRotate)
       } catch {
         frontPhoto = fs
           .readFileSync(`${imagesPath}/${addition.name}/正面.png`)
@@ -81,10 +79,6 @@ export default class extends React.Component<Props, State> {
         sideNeedRotate = await needConvertImage(`${imagesPath}/${addition.name}/侧面.png`)
       }
     }
-    console.log('===================================')
-    console.log('===================================')
-    console.log('===================================')
-    console.log(frontNeedRotate)
     this.setState({ front: frontNeedRotate, side: sideNeedRotate }, () => this.print())
 
   }
@@ -148,11 +142,8 @@ export default class extends React.Component<Props, State> {
     const pageData: string = canvas.toDataURL('image/jpeg', 1.0).replace(/\s/g, '+');
     const d = pageData.split('base64,')[1]
     const buffer = new Buffer(d, 'base64')
-    console.log(ele)
-    console.log(d)
     fs.writeFileSync(`${outputPath}/TLC个性处方-${init.id}-${init.name}.jpeg`, buffer);
     callback(init.id);
-    console.log('print recipe over for ' + init.name)
   }
 
   render() {

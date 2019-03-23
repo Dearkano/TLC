@@ -47,7 +47,7 @@ export default class extends React.Component<P> {
           name: '姓名',
           type: 'pie',
           radius: '55%',
-          center: ['40%', '50%'],
+          center: ['50%', '50%'],
           data: seriesData,
           itemStyle: {
             emphasis: {
@@ -60,7 +60,7 @@ export default class extends React.Component<P> {
       ]
     };
 
-    const chart1 = echarts.init(document.getElementById('chart1'), 'light', {
+    const chart1 = echarts.init(document.getElementById('chart1'), null, {
       width: 400,
       height: 400
     });
@@ -118,7 +118,7 @@ export default class extends React.Component<P> {
         <div className="head2">(三) 饮食方案</div>
 
         <div className="head3">一、总能量</div>
-        <div id="chart1" />
+        <div className="row center"><div id="chart1" /></div>
 
         <div className="head3">二、饮食原则</div>
         <div className="paragraph">{content0}</div>
