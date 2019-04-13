@@ -146,69 +146,47 @@ const Recipe: React.SFC<P> = ({ item }) => {
     .toString('base64');
   if (count >= 1) {
     page1 = (
-      <div id={`recipe-${init.id}-7`} className="template" style={{
-        backgroundImage: `url(data:image/png;base64,${back5})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
-      }}>
-        <div
-          className="basic-module"
-          style={{
-          }}
-        >
-          <div className="row" style={{ height: '40px', marginBottom: '1rem' }}>
-            <img
-              style={{ width: '40px' }}
-              src={`data:image/png;base64,${aerobicIcon}`}
-            />
-            <div
-              className="head2"
-              style={{
-                lineHeight: '40px',
-                marginBottom: 0,
-                marginLeft: '1rem'
-              }}
-            >
-              有氧运动
+      <>
+        <div className="row" style={{ height: '40px', marginBottom: '1rem' }}>
+          <img
+            style={{ width: '40px', marginTop: '20px' }}
+            src={`data:image/png;base64,${aerobicIcon}`}
+          />
+          <div
+            className="head2"
+            style={{
+              lineHeight: '40px',
+              marginBottom: 0,
+              marginLeft: '1rem'
+            }}
+          >
+            有氧运动
             </div>
-          </div>
-          <div
-            className="head3"
-            style={{ color: '#5f7f41', fontWeight: 'bolder' }}
-          >
-            运动频率和时间
-          </div>
-          <div className="paragraph">{aerobicExerciseTimeTip}</div>
-          <div
-            className="head3"
-            style={{ color: '#5f7f41', fontWeight: 'bolder' }}
-          >
-            运动内容
-          </div>
-          {getExerciseWay(matches[0], projects.indexOf(matches[0]))}
         </div>
-      </div>
+        <div
+          className="head3"
+          style={{ color: '#5f7f41', fontWeight: 'bolder' }}
+        >
+          运动频率和时间
+          </div>
+        <div className="paragraph">{aerobicExerciseTimeTip}</div>
+        <div
+          className="head3"
+          style={{ color: '#5f7f41', fontWeight: 'bolder' }}
+        >
+          运动内容
+          </div>
+        {getExerciseWay(matches[0], projects.indexOf(matches[0]))}
+      </>
     );
   }
 
   if (count >= 2) {
     page2 = (
       <>
-        <div id={`recipe-${init.id}-8`} className="template" style={{
-          backgroundImage: `url(data:image/png;base64,${back5})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover'
-        }}>
-          <div
-            className="basic-module"
-            style={{
-            }}
-          >
-            {getExerciseWay(matches[1], projects.indexOf(matches[1]))}
-            {count >= 3 &&
-              getExerciseWay(matches[2], projects.indexOf(matches[2]))}
-          </div>
-        </div>
+        {getExerciseWay(matches[1], projects.indexOf(matches[1]))}
+        {count >= 3 &&
+          getExerciseWay(matches[2], projects.indexOf(matches[2]))}
       </>
     );
   }
@@ -216,21 +194,9 @@ const Recipe: React.SFC<P> = ({ item }) => {
   if (count >= 4) {
     page3 = (
       <>
-        <div id={`recipe-${init.id}-9`} className="template" style={{
-          backgroundImage: `url(data:image/png;base64,${back5})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover'
-        }}>
-          <div
-            className="basic-module"
-            style={{
-            }}
-          >
-            {getExerciseWay(matches[3], projects.indexOf(matches[3]))}
-            {count >= 5 &&
-              getExerciseWay(matches[4], projects.indexOf(matches[4]))}
-          </div>
-        </div>
+        {getExerciseWay(matches[3], projects.indexOf(matches[3]))}
+        {count >= 5 &&
+          getExerciseWay(matches[4], projects.indexOf(matches[4]))}
       </>
     );
   }
@@ -238,21 +204,9 @@ const Recipe: React.SFC<P> = ({ item }) => {
   if (count >= 6) {
     page4 = (
       <>
-        <div id={`recipe-${init.id}-10`} className="template" style={{
-          backgroundImage: `url(data:image/png;base64,${back5})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover'
-        }}>
-          <div
-            className="basic-module"
-            style={{
-            }}
-          >
-            {getExerciseWay(matches[5], projects.indexOf(matches[5]))}
-            {count >= 7 &&
-              getExerciseWay(matches[6], projects.indexOf(matches[6]))}
-          </div>
-        </div>
+        {getExerciseWay(matches[5], projects.indexOf(matches[5]))}
+        {count >= 7 &&
+          getExerciseWay(matches[6], projects.indexOf(matches[6]))}
       </>
     );
   }
@@ -467,60 +421,43 @@ const Recipe: React.SFC<P> = ({ item }) => {
   const bg3 = fs.readFileSync(`./src/images/bg3.png`).toString('base64');
   return (
     <>
-      <div id={`recipe-${init.id}-6`} className="template" style={{
-        backgroundImage: `url(data:image/png;base64,${back5})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
-      }}>
-        <div
-          className="basic-module"
-          style={{
-          }}
-        >
-          <div
-
-          >
-            <div className="head2">（三）运动处方</div>
-            <div className="head3">您目前的运动情况为：</div>
-            <table className="e-table">
-              <tr>
-                <td rowSpan={2}>测试成绩</td>
-                <td>俯卧撑（个）</td>
-                <td>卷腹（个）</td>
-                <td>静蹲（秒）</td>
-                <td>开合跳（个）</td>
-                <td>坐位体前屈（厘米）</td>
-              </tr>
-              <tr>
-                <td>{init.pushUp}</td>
-                <td>{init.rollUp}</td>
-                <td>{init.squatTime}</td>
-                <td>{init.jumpingJacks}</td>
-                <td>{init.sitAndReach}</td>
-              </tr>
-              <tr>
-                <td rowSpan={2}>水平评估</td>
-                <td>上肢</td>
-                <td>核心</td>
-                <td>下肢</td>
-                <td>心肺功能</td>
-                <td>柔韧性</td>
-              </tr>
-              <tr>
-                <td>{pushUp}</td>
-                <td>{rollUp}</td>
-                <td>{st}</td>
-                <td>{jj}</td>
-                <td>{sr}</td>
-              </tr>
-            </table>
-            <div className="paragraph">
-              建议采用有氧运动和无氧运动相结合的运动整体方案。
+      <div className="head2">（三）运动处方</div>
+      <div className="head3">您目前的运动情况为：</div>
+      <table className="e-table">
+        <tr>
+          <td rowSpan={2}>测试成绩</td>
+          <td>俯卧撑（个）</td>
+          <td>卷腹（个）</td>
+          <td>静蹲（秒）</td>
+          <td>开合跳（个）</td>
+          <td>坐位体前屈（厘米）</td>
+        </tr>
+        <tr>
+          <td>{init.pushUp}</td>
+          <td>{init.rollUp}</td>
+          <td>{init.squatTime}</td>
+          <td>{init.jumpingJacks}</td>
+          <td>{init.sitAndReach}</td>
+        </tr>
+        <tr>
+          <td rowSpan={2}>水平评估</td>
+          <td>上肢</td>
+          <td>核心</td>
+          <td>下肢</td>
+          <td>心肺功能</td>
+          <td>柔韧性</td>
+        </tr>
+        <tr>
+          <td>{pushUp}</td>
+          <td>{rollUp}</td>
+          <td>{st}</td>
+          <td>{jj}</td>
+          <td>{sr}</td>
+        </tr>
+      </table>
+      <div className="paragraph">
+        建议采用有氧运动和无氧运动相结合的运动整体方案。
             </div>
-          </div>
-        </div>
-      </div>
-
       {/* <div id={`recipe-${init.id}-7`} className="template">
         <div
           className="basic-module"
@@ -540,183 +477,202 @@ const Recipe: React.SFC<P> = ({ item }) => {
       {page3}
       {page4}
 
-      <div id={`recipe-${init.id}-11`} className="template" style={{
-        backgroundImage: `url(data:image/png;base64,${back5})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
-      }}>
+      <div
+        className="row"
+        style={{ height: '40px', marginBottom: '1rem' }}
+      >
+        <img
+          style={{ width: '40px', marginTop: '20px' }}
+          src={`data:image/png;base64,${anaerobicIcon}`}
+        />
         <div
-          className="basic-module"
+          className="head2"
           style={{
+            lineHeight: '40px',
+            marginBottom: 0,
+            marginLeft: '1rem'
           }}
         >
-          <div >
-            <div
-              className="row"
-              style={{ height: '40px', marginBottom: '1rem' }}
-            >
-              <img
-                style={{ width: '40px' }}
-                src={`data:image/png;base64,${anaerobicIcon}`}
-              />
-              <div
-                className="head2"
-                style={{
-                  lineHeight: '40px',
-                  marginBottom: 0,
-                  marginLeft: '1rem'
-                }}
-              >
-                无氧运动
+          无氧运动
               </div>
+      </div>
+      <div className="paragraph">{data.actionTip}</div>
+      <div
+        className="head3"
+        style={{ color: '#5f7f41', fontWeight: 'bolder' }}
+      >
+        运动频率和时间
             </div>
-            <div className="paragraph">{data.actionTip}</div>
+      <div className="paragraph">{anAerobicExerciseTimeTip}</div>
+      <div
+        className="head3"
+        style={{ color: '#5f7f41', fontWeight: 'bolder' }}
+      >
+        运动内容
+            </div>
+      <div className="row" style={{ height: '20px' }}>
+        <img
+          style={{ width: '20px' }}
+          src={`data:image/png;base64,${icon2}`}
+        />
+        <div
+          className="head4"
+          style={{
+            lineHeight: '20px',
+            marginBottom: 0,
+            marginLeft: '1rem'
+          }}
+        >
+          上肢运动
+              </div>
+      </div>
+      {anaPart1}
+      <div className="row" style={{ height: '20px' }}>
+        <img
+          style={{ width: '20px' }}
+          src={`data:image/png;base64,${icon2}`}
+        />
+        <div
+          className="head4"
+          style={{
+            lineHeight: '20px',
+            marginBottom: 0,
+            marginLeft: '1rem'
+          }}
+        >
+          下肢运动
+              </div>
+      </div>
+      {anaPart3}
+      <div className="row" style={{ height: '20px' }}>
+        <img
+          style={{ width: '20px' }}
+          src={`data:image/png;base64,${icon2}`}
+        />
+        <div
+          className="head4"
+          style={{
+            lineHeight: '20px',
+            marginBottom: 0,
+            marginLeft: '1rem'
+          }}
+        >
+          核心
+              </div>
+      </div>
+      {anaPart2}
+      <div
+        className="row"
+        style={{ height: '40px', marginBottom: '1rem' }}
+      >
+        <img
+          style={{ width: '40px', marginTop: '20px' }}
+          src={`data:image/png;base64,${otherIcon}`}
+        />
+        <div
+          className="head2"
+          style={{
+            lineHeight: '40px',
+            marginBottom: 0,
+            marginLeft: '1rem'
+          }}
+        >
+          其他
+              </div>
+      </div>
+      <div className="paragraph">{`根据您的实际身体情况，推荐您在keep中选择级别为${l1}的自己喜爱的其它运动。每周可以一到两次的${l2}等无氧有氧混合式运动，来替换上述有氧或无氧运动安排。`}</div>
+      {init.gender === '女' && (
+        <>
+          <div
+            className="row"
+            style={{ height: '40px', marginBottom: '1rem', marginTop: '1rem' }}
+          >
+            <img
+              style={{ width: '40px', marginTop: '20px' }}
+              src={`data:image/png;base64,${femaleIcon}`}
+            />
             <div
-              className="head3"
-              style={{ color: '#5f7f41', fontWeight: 'bolder' }}
+              className="head2"
+              style={{
+                lineHeight: '40px',
+                marginBottom: 0,
+                marginLeft: '1rem',
+                marginTop: '1rem'
+              }}
             >
-              运动频率和时间
-            </div>
-            <div className="paragraph">{anAerobicExerciseTimeTip}</div>
+              经期运动注意事项
+                  </div>
+          </div>
+          <div className="row" style={{ height: '20px',marginTop:'1rem' }}>
+            <img
+              style={{ width: '20px' }}
+              src={`data:image/png;base64,${icon3}`}
+            />
             <div
-              className="head3"
-              style={{ color: '#5f7f41', fontWeight: 'bolder' }}
+              className="head4"
+              style={{
+                lineHeight: '20px',
+                marginBottom: 0,
+                marginLeft: '1rem'
+              }}
+            >
+              适宜人群
+              </div>
+          </div>
+          <div className="paragraph">{data.feTip1}</div>
+          <div className="row" style={{ height: '20px' }}>
+            <img
+              style={{ width: '20px' }}
+              src={`data:image/png;base64,${icon3}`}
+            />
+            <div
+              className="head4"
+              style={{
+                lineHeight: '20px',
+                marginBottom: 0,
+                marginLeft: '1rem'
+              }}
             >
               运动内容
-            </div>
-            <div className="row" style={{ height: '20px' }}>
-              <img
-                style={{ width: '20px' }}
-                src={`data:image/png;base64,${icon3}`}
-              />
-              <div
-                className="head4"
-                style={{
-                  lineHeight: '20px',
-                  marginBottom: 0,
-                  marginLeft: '1rem'
-                }}
-              >
-                上肢运动
               </div>
-            </div>
-            {anaPart1}
-            <div className="row" style={{ height: '20px' }}>
-              <img
-                style={{ width: '20px' }}
-                src={`data:image/png;base64,${icon3}`}
-              />
-              <div
-                className="head4"
-                style={{
-                  lineHeight: '20px',
-                  marginBottom: 0,
-                  marginLeft: '1rem'
-                }}
-              >
-                下肢运动
-              </div>
-            </div>
-            {anaPart3}</div></div></div>
-      <div id={`recipe-${init.id}-16`} className="template" style={{
-        backgroundImage: `url(data:image/png;base64,${back5})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
-      }}>
-        <div
-          className="basic-module"
-          style={{
-          }}
-        >
-          <div >
-            <div className="row" style={{ height: '20px' }}>
-              <img
-                style={{ width: '20px' }}
-                src={`data:image/png;base64,${icon3}`}
-              />
-              <div
-                className="head4"
-                style={{
-                  lineHeight: '20px',
-                  marginBottom: 0,
-                  marginLeft: '1rem'
-                }}
-              >
-                核心
-              </div>
-            </div>
-            {anaPart2}
           </div>
-        </div>
-      </div>
-
-      <div id={`recipe-${init.id}-15`} className="template" style={{
-        backgroundImage: `url(data:image/png;base64,${back5})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover'
-      }}>
-        <div
-          className="basic-module"
-          style={{
-            marginTop: '40px'
-          }}
-        >
-          <div
-          >
+          <div className="paragraph">{data.feTip2}</div>
+          <div className="row" style={{ height: '20px' }}>
+            <img
+              style={{ width: '20px' }}
+              src={`data:image/png;base64,${icon3}`}
+            />
             <div
-              className="row"
-              style={{ height: '40px', marginBottom: '1rem' }}
+              className="head4"
+              style={{
+                lineHeight: '20px',
+                marginBottom: 0,
+                marginLeft: '1rem'
+              }}
             >
-              <img
-                style={{ width: '40px' }}
-                src={`data:image/png;base64,${otherIcon}`}
-              />
-              <div
-                className="head2"
-                style={{
-                  lineHeight: '40px',
-                  marginBottom: 0,
-                  marginLeft: '1rem'
-                }}
-              >
-                其他
+              运动禁忌
               </div>
-            </div>
-            <div className="paragraph">{`根据您的实际身体情况，推荐您在keep中选择级别为${l1}的自己喜爱的其它运动。每周可以一到两次的${l2}等无氧有氧混合式运动，来替换上述有氧或无氧运动安排。`}</div>
-            {init.gender === '女' && (
-              <>
-                <div
-                  className="row"
-                  style={{ height: '40px', marginBottom: '1rem' }}
-                >
-                  <img
-                    style={{ width: '40px' }}
-                    src={`data:image/png;base64,${femaleIcon}`}
-                  />
-                  <div
-                    className="head2"
-                    style={{
-                      lineHeight: '40px',
-                      marginBottom: 0,
-                      marginLeft: '1rem'
-                    }}
-                  >
-                    经期运动注意事项
-                  </div>
-                </div>
-                <div className="head3">1. 适宜人群</div>
-                <div className="paragraph">{data.feTip1}</div>
-                <div className="head3">2. 运动内容</div>
-                <div className="paragraph">{data.feTip2}</div>
-                <div className="head3">3. 运动禁忌</div>
-                <div className="paragraph">{data.feTip3}</div>
-                <div className="head3">4. 其他注意要点</div>
-                <div className="paragraph">{data.feTip4}</div>
-              </>
-            )}
           </div>
-        </div>
-      </div>
+          <div className="paragraph">{data.feTip3}</div>
+          <div className="row" style={{ height: '20px' }}>
+            <img
+              style={{ width: '20px' }}
+              src={`data:image/png;base64,${icon3}`}
+            />
+            <div
+              className="head4"
+              style={{
+                lineHeight: '20px',
+                marginBottom: 0,
+                marginLeft: '1rem'
+              }}
+            >
+              其他注意要点
+              </div>
+          </div>
+          <div className="paragraph" style={{ paddingBottom: '2rem' }}>{data.feTip4}</div>
+        </>
+      )}
     </>
   );
 };

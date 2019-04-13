@@ -196,32 +196,32 @@ export default class extends React.Component<P> {
     let sideNeedRotate = false;
     try {
       frontPhoto = fs
-        .readFileSync(`${imagesPath}/${addition.name}/正面.jpg`)
+        .readFileSync(`${imagesPath}/${addition.id}${addition.name}/正面.jpg`)
         .toString('base64');
     } catch {
       try {
         frontPhoto = fs
-          .readFileSync(`${imagesPath}/${addition.name}/正面.jpeg`)
+          .readFileSync(`${imagesPath}/${addition.id}${addition.name}/正面.jpeg`)
           .toString('base64');
       } catch {
         frontPhoto = fs
-          .readFileSync(`${imagesPath}/${addition.name}/正面.png`)
+          .readFileSync(`${imagesPath}/${addition.id}${addition.name}/正面.png`)
           .toString('base64');
       }
     }
     let sidePhoto = ''
     try {
       sidePhoto = fs
-        .readFileSync(`${imagesPath}/${addition.name}/侧面.jpg`)
+        .readFileSync(`${imagesPath}/${addition.id}${addition.name}/侧面.jpg`)
         .toString('base64');
     } catch {
       try {
         sidePhoto = fs
-          .readFileSync(`${imagesPath}/${addition.name}/侧面.jpeg`)
+          .readFileSync(`${imagesPath}/${addition.id}${addition.name}/侧面.jpeg`)
           .toString('base64');
       } catch {
         sidePhoto = fs
-          .readFileSync(`${imagesPath}/${addition.name}/侧面.png`)
+          .readFileSync(`${imagesPath}/${addition.id}${addition.name}/侧面.png`)
           .toString('base64');
       }
     }
@@ -232,156 +232,103 @@ export default class extends React.Component<P> {
     console.log('front ' + front + ' side' + side)
     return (
       <>
-        <div id={`recipe-${init.id}-2`} className="template" style={{
-          backgroundImage: `url(data:image/png;base64,${back5})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover'
-        }}>
-          <div
-            className="basic-module"
-            style={{
-              marginTop: '70px'
-            }}
-          >
-            <div className="head2">（二）整体建议</div>
-            <div
-              className="head3"
-              style={{ color: '#5f7f41', fontWeight: 'bolder' }}
-            >
-              基本运动情况
+        <div className="head2">（二）整体建议</div>
+        <div
+          className="head3"
+          style={{ color: '#5f7f41', fontWeight: 'bolder' }}
+        >
+          基本运动情况
           </div>
-            <div className="row">
-              <img
-                style={{ width: '80px' }}
-                src={`data:image/png;base64,${icon1}`}
-              />
-              <div className="head4" style={{ color: '#5f7f41' }}>
-                久坐情况
+        <div className="row">
+          <img
+            style={{ width: '80px' }}
+            src={`data:image/png;base64,${icon1}`}
+          />
+          <div className="head4" style={{ color: '#5f7f41' }}>
+            久坐情况
             </div>
-            </div>
-            <div className="paragraph">{content1}</div>
-            <div className="paragraph">{content21}</div>
-          </div>
         </div>
-        <div id={`recipe-${init.id}-3`} className="template" style={{
-          backgroundImage: `url(data:image/png;base64,${back5})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover'
-        }}>
-          <div
-            className="basic-module"
-            style={{
-              marginTop: '70px'
-            }}
-          >
-            <div className="paragraph">{content22}</div>
+        <div className="paragraph">{content1}</div>
+        <div className="paragraph" style={{ marginLeft: '40px' }}>{content21}</div>
+        <div className="paragraph" style={{ marginLeft: '40px' }}>{content22}</div>
+        <div>
+          <div className="row">
+            <img
+              style={{ width: '80px' }}
+              src={`data:image/png;base64,${icon1}`}
+            />
+            <div className="head4" style={{ color: '#5f7f41' }}>
+              运动频率
+              </div>
           </div>
-        </div>
-        <div id={`recipe-${init.id}-4`} className="template" style={{
-          backgroundImage: `url(data:image/png;base64,${back5})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover'
-        }}>
-          <div
-            className="basic-module"
-            style={{
-            }}
-          >
-            <div>
-              <div className="row">
-                <img
-                  style={{ width: '80px' }}
-                  src={`data:image/png;base64,${icon1}`}
-                />
-                <div className="head4" style={{ color: '#5f7f41' }}>
-                  运动频率
+          <div className="paragraph">{content3}</div>
+          <div className="row">
+            <img
+              style={{ width: '80px' }}
+              src={`data:image/png;base64,${icon1}`}
+            />
+            <div className="head4" style={{ color: '#5f7f41' }}>
+              动机与条件克服
               </div>
-              </div>
-              <div className="paragraph">{content3}</div>
-              <div className="row">
-                <img
-                  style={{ width: '80px' }}
-                  src={`data:image/png;base64,${icon1}`}
-                />
-                <div className="head4" style={{ color: '#5f7f41' }}>
-                  动机与条件克服
-              </div>
-              </div>
-              <div className="paragraph">{content4}</div>
-              <div className="row">
-                <img
-                  style={{ width: '80px' }}
-                  src={`data:image/png;base64,${icon1}`}
-                />
-                <div className="head4" style={{ color: '#5f7f41' }}>
-                  出行建议
-              </div>
-              </div>
-              <div className="paragraph">{content5}</div>
-              <div className="row">
-                <img
-                  style={{ width: '80px' }}
-                  src={`data:image/png;base64,${icon1}`}
-                />
-                <div className="head4" style={{ color: '#5f7f41' }}>
-                  健康状况
-              </div>
-              </div>
-              <div className="paragraph">{content6}</div>
-            </div>
           </div>
+          <div className="paragraph">{content4}</div>
+          <div className="row">
+            <img
+              style={{ width: '80px' }}
+              src={`data:image/png;base64,${icon1}`}
+            />
+            <div className="head4" style={{ color: '#5f7f41' }}>
+              出行建议
+              </div>
+          </div>
+          <div className="paragraph">{content5}</div>
+          <div className="row">
+            <img
+              style={{ width: '80px' }}
+              src={`data:image/png;base64,${icon1}`}
+            />
+            <div className="head4" style={{ color: '#5f7f41' }}>
+              健康状况
+              </div>
+          </div>
+          <div className="paragraph">{content6}</div>
         </div>
-        <div id={`recipe-${init.id}-5`} className="template" style={{
-          backgroundImage: `url(data:image/png;base64,${back5})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover'
-        }}>
-          <div
-            className="basic-module"
-            style={{
-            }}
-          >
-            <div
-            >
-              <div
-                className="head3"
-                style={{
-                  color: '#5f7f41',
-                  fontWeight: 'bolder',
-                  textAlign: 'center'
-                }}
-              >
-                体态评估情况
+        <div
+          className="head3"
+          style={{
+            color: '#5f7f41',
+            fontWeight: 'bolder',
+            textAlign: 'center'
+          }}
+        >
+          体态评估情况
             </div>
-              <div className="row" style={{ marginBottom: '40px' }}>
-                <img
-                  style={{ width: '150px', transform: front === 1 ? 'rotate(90deg)' : front === 2 ? 'rotate(-90deg)' : '' }}
-                  src={`data:image/png;base64,${frontPhoto}`}
-                />
-                <img
-                  style={{ width: '150px', marginLeft: '100px', transform: side === 1 ? 'rotate(90deg)' : side === 2 ? 'rotate(-90deg)' : '' }}
-                  src={`data:image/png;base64,${sidePhoto}`}
-                /></div>
+        <div className="row" style={{ marginBottom: '40px' }}>
+          <img
+            style={{ width: '150px', transform: front === 1 ? 'rotate(90deg)' : front === 2 ? 'rotate(-90deg)' : '' }}
+            src={`data:image/png;base64,${frontPhoto}`}
+          />
+          <img
+            style={{ width: '150px', marginLeft: '100px', transform: side === 1 ? 'rotate(90deg)' : side === 2 ? 'rotate(-90deg)' : '' }}
+            src={`data:image/png;base64,${sidePhoto}`}
+          /></div>
 
-              <div className="paragraph">
-                经过评估，您的体态<b>{addition.evaluation}</b>
-              </div>
-              {eTips}
-              {addition.evaluation.includes('骨盆前倾') && (
-                <div className="paragraph">{data.eTip1}</div>
-              )}
-              {addition.evaluation.includes('颈前伸') && (
-                <div className="paragraph">{data.eTip2}</div>
-              )}
-              {addition.evaluation.includes('驼背圆肩') && (
-                <div className="paragraph">{data.eTip3}</div>
-              )}
-              {addition.evaluation.includes('足内翻') && (
-                <div className="paragraph">{data.eTip4}</div>
-              )}
-            </div>
-          </div>
+        <div className="paragraph">
+          经过评估，您的体态<b>{addition.evaluation}</b>
         </div>
+        {eTips}
+        {addition.evaluation.includes('骨盆前倾') && (
+          <div className="paragraph">{data.eTip1}</div>
+        )}
+        {addition.evaluation.includes('颈前伸') && (
+          <div className="paragraph">{data.eTip2}</div>
+        )}
+        {addition.evaluation.includes('驼背圆肩') && (
+          <div className="paragraph">{data.eTip3}</div>
+        )}
+        {addition.evaluation.includes('足内翻') && (
+          <div className="paragraph">{data.eTip4}</div>
+        )}
       </>
     );
   }

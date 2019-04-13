@@ -7,7 +7,7 @@ interface P {
 }
 
 const Basic: React.SFC<P> = ({ item }) => {
-  const { init,base } = item;
+  const { init, base } = item;
   return (
     <div className="basic-module">
       <div className="head2">(一) 基本信息</div>

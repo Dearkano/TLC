@@ -47,7 +47,7 @@ export default class extends React.Component<P> {
           name: '姓名',
           type: 'pie',
           radius: '55%',
-          center: ['40%', '50%'],
+          center: ['50%', '50%'],
           data: seriesData,
           itemStyle: {
             emphasis: {
@@ -55,13 +55,56 @@ export default class extends React.Component<P> {
               shadowOffsetX: 0,
               shadowColor: 'rgba(0, 0, 0, 0.5)'
             }
-          }
+          }, label: {
+            normal: {
+              formatter: '  {b|{b}}{per|{d}%}  ',
+
+              // shadowBlur:3,
+              // shadowOffsetX: 2,
+              // shadowOffsetY: 2,
+              // shadowColor: '#999',
+              // padding: [0, 7],
+              rich: {
+                a: {
+                  color: '#999',
+                  lineHeight: 22,
+                  align: 'center'
+                },
+                // abg: {
+                //     backgroundColor: '#333',
+                //     width: '100%',
+                //     align: 'right',
+                //     height: 22,
+                //     borderRadius: [4, 4, 0, 0]
+                // },
+                hr: {
+                  borderColor: '#aaa',
+                  width: '100%',
+                  borderWidth: 0.5,
+                  height: 0
+                },
+                b: {
+                  fontSize: 16,
+                  lineHeight: 33,
+                  color: '#000'
+                },
+                per: {
+                  padding: [2, 4],
+                  borderRadius: 2,
+                  fontSize: 16,
+                  lineHeight: 33,
+                  color: '#000'
+                }
+              }
+            }
+          },
         }
       ]
     };
+    echarts.registerTheme('tlc', { color: ['#00B0FE', '#90D050', '#FFC000'] })
 
-    const chart1 = echarts.init(document.getElementById('chart1'), 'light', {
-      width: 400,
+    const chart1 = echarts.init(document.getElementById('chart1'), 'tlc', {
+      width: 500,
       height: 400
     });
     chart1.setOption(option);
@@ -93,7 +136,7 @@ export default class extends React.Component<P> {
       foods.push('控制嘌呤摄入量');
     }
 
-    const content0 = ['饮食总原则', foods.join('、')];
+    const content0 = foods.join('、');
 
     const { content1, content2, content3 } = data;
 
@@ -112,30 +155,38 @@ export default class extends React.Component<P> {
     const img1 = fs
       .readFileSync('./src/images/foodExchange.png')
       .toString('base64');
+    const dietBack = fs.readFileSync(`./src/images/diet.png`).toString('base64');
+    const habitBack = fs.readFileSync(`./src/images/habit.png`).toString('base64');
 
-    return (
+    const habit1Back = fs.readFileSync(`./src/images/habit1.png`).toString('base64'); return (
       <div className="basic-module">
         <div className="head2">(三) 饮食方案</div>
 
         <div className="head3">一、总能量</div>
-        <div id="chart1" />
+        <div className="row center"><div id="chart1" /></div>
 
         <div className="head3">二、饮食原则</div>
-        <div className="paragraph">{content0}</div>
-        <div className="paragraph">{content1}</div>
-        <div className="paragraph">{content2}</div>
-        <div className="paragraph">{content3}</div>
-        <div className="paragraph">{content4}</div>
-        <div className="paragraph">{content5}</div>
-        <div className="paragraph">{content6}</div>
+        <div className="center"><img style={{ width: '500px' }} src={`data:image/png;base64,${dietBack}`}></img></div>
+
+        <div id="p00">饮食总原则:</div>
+        <div id="p0">{content0}</div>
+        <div id="p1">{content1}</div>
+        <div id="p2">{content2}</div>
+        <div id="p3">{content3}</div>
+        <div id="p4">{content4}</div>
+        <div id="p5">{content5}</div>
+        <div id="p6">{content6}</div>
 
         <div className="head3">三、饮食习惯</div>
-        <div className="paragraph">{content7}</div>
-        <div className="paragraph">{content8}</div>
-        <div className="paragraph">{content9}</div>
-        <div className="paragraph">{content10}</div>
-        <div className="paragraph">{content11}</div>
-        <div className="paragraph">{content12}</div>
+        <div className="center"><img style={{ width: '500px' }} src={`data:image/png;base64,${habitBack}`}></img></div>
+
+        <div className="center"><img style={{ width: '500px' }} src={`data:image/png;base64,${habit1Back}`}></img></div>
+        <div id="h1">{content7}</div>
+        <div id="h2">{content8}</div>
+        <div id="h3">{content9}</div>
+        <div id="h4">{content10}</div>
+        <div id="h5">{content11}</div>
+        <div id="h6">{content12}</div>
 
         <div className="head3">四、食物交换份</div>
         <table className="e1-table">

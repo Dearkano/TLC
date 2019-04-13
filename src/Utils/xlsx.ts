@@ -22,7 +22,6 @@ export function readInitData(filepath: string) {
     'BMI',
     'muscle',
     'fatRate',
-    'VAT',
     'visceralFatRate',
     'restingEnergyComsumption',
     'frontPhoto',

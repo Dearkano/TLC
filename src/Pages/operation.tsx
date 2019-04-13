@@ -26,10 +26,10 @@ export default class extends React.Component<Props, State> {
     this.state = {
       data: [],
       renderOver: [],
-      filepath1: './input/init.xls',
-      filepath2: './input/base.xls',
-      filepath3: './input/addition.xlsx',
-      imagesPath: './input/images',
+      filepath1: './input/二期/init.xlsx',
+      filepath2: './input/二期/base.xlsx',
+      filepath3: './input/二期/addition.xlsx',
+      imagesPath: './input/images/二期',
       outputPath: './output',
       // filepath1: '',
       // filepath2: '',
@@ -37,7 +37,7 @@ export default class extends React.Component<Props, State> {
       // imagesPath: '',
       // outputPath: '',
       disable: false,
-      mode: 'production',
+      mode: 'preview',
       current: 0
     };
   }
@@ -252,13 +252,13 @@ export default class extends React.Component<Props, State> {
                   imagesPath={imagesPath}
                   callback={this.destory}
                 />
-                {/* <ReportTemplate
+                <ReportTemplate
                   key={data[0].init.id}
                   item={data[0]}
                   outputPath={outputPath}
                   imagesPath={imagesPath}
                   callback={this.destory}
-                /> */}
+                />
               </>
             )}
           </>
@@ -375,8 +375,16 @@ export default class extends React.Component<Props, State> {
                 />
               ))} */}
               <>
-                {data[current] &&
+                {/* {data[current] &&
                   <RecipeTemplate
+                    key={data[current].init.id}
+                    item={data[current]}
+                    outputPath={outputPath}
+                    imagesPath={imagesPath}
+                    callback={this.destory}
+                  />} */}
+                {data[current] &&
+                  <ReportTemplate
                     key={data[current].init.id}
                     item={data[current]}
                     outputPath={outputPath}
