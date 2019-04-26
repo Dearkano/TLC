@@ -158,14 +158,50 @@ export default class extends React.Component<P> {
     const dietBack = fs.readFileSync(`./src/images/diet.png`).toString('base64');
     const habitBack = fs.readFileSync(`./src/images/habit.png`).toString('base64');
 
-    const habit1Back = fs.readFileSync(`./src/images/habit1.png`).toString('base64'); return (
+    const habit1Back = fs.readFileSync(`./src/images/habit1.png`).toString('base64');
+    const h1 = fs
+      .readFileSync(`./src/images/static/饮食方案.png`)
+      .toString('base64');
+    const h2 = fs
+      .readFileSync(`./src/images/static/总能量.png`)
+      .toString('base64');
+    const h3 = fs
+      .readFileSync(`./src/images/static/饮食原则.png`)
+      .toString('base64');
+    const h4 = fs
+      .readFileSync(`./src/images/static/饮食习惯.png`)
+      .toString('base64');
+    const h5 = fs
+      .readFileSync(`./src/images/static/食物交换份.png`)
+      .toString('base64');
+    const h6 = fs
+      .readFileSync(`./src/images/static/交换份.png`)
+      .toString('base64');
+    const h7 = fs
+      .readFileSync(`./src/images/static/交换表.png`)
+      .toString('base64');
+    return (
       <div className="basic-module">
-        <div className="head2">(三) 饮食方案</div>
+        <div className="row" style={{
+          justifyContent: 'flex-start'
+        }}>
+          < img
+            style={{ height: 100, marginLeft: '-50px' }}
+            src={`data:image/png;base64,${h1}`}
+          /></div>
 
-        <div className="head3">一、总能量</div>
+        <div className="row">
+          < img
+            style={{ height: 80 }}
+            src={`data:image/png;base64,${h2}`}
+          /></div>
         <div className="row center"><div id="chart1" /></div>
 
-        <div className="head3">二、饮食原则</div>
+        <div className="row">
+          < img
+            style={{ height: 100 }}
+            src={`data:image/png;base64,${h3}`}
+          /></div>
         <div className="center"><img style={{ width: '500px' }} src={`data:image/png;base64,${dietBack}`}></img></div>
 
         <div id="p00">饮食总原则:</div>
@@ -177,7 +213,11 @@ export default class extends React.Component<P> {
         <div id="p5">{content5}</div>
         <div id="p6">{content6}</div>
 
-        <div className="head3">三、饮食习惯</div>
+        <div className="row">
+          < img
+            style={{ height: 100}}
+            src={`data:image/png;base64,${h4}`}
+          /></div>
         <div className="center"><img style={{ width: '500px' }} src={`data:image/png;base64,${habitBack}`}></img></div>
 
         <div className="center"><img style={{ width: '500px' }} src={`data:image/png;base64,${habit1Back}`}></img></div>
@@ -188,7 +228,11 @@ export default class extends React.Component<P> {
         <div id="h5">{content11}</div>
         <div id="h6">{content12}</div>
 
-        <div className="head3">四、食物交换份</div>
+        <div className="row">
+          < img
+            style={{ height: 100}}
+            src={`data:image/png;base64,${h5}`}
+          /></div>
         <table className="e1-table">
           <tr>
             <td>总能量（kcal)</td>
@@ -226,7 +270,11 @@ export default class extends React.Component<P> {
         </div>
         <div className="center paragraph">每份=90kcal能量</div>
 
-        <div className="center head4">每一交换份食品的产能营养素含量表</div>
+        <div className="row">
+          < img
+            style={{ height: 80 }}
+            src={`data:image/png;base64,${h6}`}
+          /></div>
 
         <table className="e1-table">
           <tr>
@@ -308,7 +356,11 @@ export default class extends React.Component<P> {
           </tr>
         </table>
 
-        <div className="center head4">各组等值食物交换表</div>
+        <div className="row">
+          < img
+            style={{ height: 80 }}
+            src={`data:image/png;base64,${h7}`}
+          /></div>
         <table className="e1-table">
           <tr>
             <td className="e1-table-c4">谷薯类 重量（g）</td>

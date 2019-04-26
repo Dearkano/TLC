@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ISurvey, IData } from '@tlc';
 import { Table } from 'antd';
+const fs = require('fs')
 
 interface P {
   item: IData;
@@ -8,10 +9,32 @@ interface P {
 
 const Basic: React.SFC<P> = ({ item }) => {
   const { init, base } = item;
+  const h1 = fs
+    .readFileSync(`./src/images/static/基本信息.png`)
+    .toString('base64');
+  const h2 = fs
+    .readFileSync(`./src/images/static/基础信息.png`)
+    .toString('base64');
+    const h3 = fs
+    .readFileSync(`./src/images/static/体格检查.png`)
+    .toString('base64');
+    const h4 = fs
+    .readFileSync(`./src/images/static/肥胖相关疾病.png`)
+    .toString('base64');
   return (
     <div className="basic-module">
-      <div className="head2">(一) 基本信息</div>
-      <div className="head3 center">基础信息</div>
+      <div className="row" style={{
+       justifyContent: 'flex-start'
+      }}>
+        < img
+          style={{ height: 100, marginLeft: '-30px' }}
+          src={`data:image/png;base64,${h1}`}
+        /></div>
+      <div className="row">
+        < img
+          style={{ height: 100 }}
+          src={`data:image/png;base64,${h2}`}
+        /></div>
       <table className="e1-table">
         <tr>
           <td colSpan={5}>姓名</td>
@@ -39,7 +62,11 @@ const Basic: React.SFC<P> = ({ item }) => {
         </tr>
       </table>
 
-      <div className="head3 center">体格检查</div>
+      <div className="row">
+        < img
+          style={{ height: 85 }}
+          src={`data:image/png;base64,${h3}`}
+        /></div>
       <table className="e1-table">
         <tr>
           <td>基础代谢(kcal)</td>
@@ -56,24 +83,28 @@ const Basic: React.SFC<P> = ({ item }) => {
         </tr>
       </table>
 
-      <div className="head3 center">肥胖相关疾病</div>
+      <div className="row">
+        < img
+          style={{ height: 100 }}
+          src={`data:image/png;base64,${h4}`}
+        /></div>
       <table className="e1-table">
-      <tr>
-        <td>血压</td>
-        <td>糖尿病</td>
-        <td>血脂异常</td>
-        <td>脂肪肝</td>
-        <td>高血尿酸或痛风</td>
-      </tr>
-      <tr>
-        <td>{base.bloodPressure}</td>
-        <td>{base.diabetes}</td>
-        <td>{base.bloodFatProblem}</td>
-        <td>{base.fattyLiver}</td>
-        <td>{base.uricAcid}</td>
-      </tr>
+        <tr>
+          <td>血压</td>
+          <td>糖尿病</td>
+          <td>血脂异常</td>
+          <td>脂肪肝</td>
+          <td>高血尿酸或痛风</td>
+        </tr>
+        <tr>
+          <td>{base.bloodPressure}</td>
+          <td>{base.diabetes}</td>
+          <td>{base.bloodFatProblem}</td>
+          <td>{base.fattyLiver}</td>
+          <td>{base.uricAcid}</td>
+        </tr>
       </table>
-    </div>
+    </div >
   );
 };
 export default Basic;

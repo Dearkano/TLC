@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ISurvey, IData } from '@tlc';
 import data from '../../data/report/overall';
+const fs = require('fs')
 
 interface P {
   item: IData;
@@ -50,24 +51,98 @@ const Overall: React.SFC<P> = ({ item }) => {
   const content7 = data.smartExamination.map(i => (
     <div className="paragraph">{i}</div>
   ));
-
+  const h1 = fs
+  .readFileSync(`./src/images/static/整体建议.png`)
+  .toString('base64');
+  const h2 = fs
+  .readFileSync(`./src/images/static/生活方式.png`)
+  .toString('base64');
+  const h3 = fs
+  .readFileSync(`./src/images/static/吸烟.png`)
+  .toString('base64');
+  const h4 = fs
+  .readFileSync(`./src/images/static/饮酒.png`)
+  .toString('base64');
+  const h5 = fs
+  .readFileSync(`./src/images/static/睡眠.png`)
+  .toString('base64');
+  const h6 = fs
+  .readFileSync(`./src/images/static/心理状态.png`)
+  .toString('base64');
+  const h7 = fs
+  .readFileSync(`./src/images/static/健康检测.png`)
+  .toString('base64');
+  const h8 = fs
+  .readFileSync(`./src/images/static/体检.png`)
+  .toString('base64');
+  const h9 = fs
+  .readFileSync(`./src/images/static/智能检测设备.png`)
+  .toString('base64');
   return (
     <div className="basic-module">
-      <div className="head2">（二）整体建议</div>
-      <div className="head3">一、生活方式</div>
-      <div className="head4">1、吸烟</div>
+      <div className="row" style={{
+       justifyContent: 'flex-start'
+      }}>
+        < img
+          style={{ height: 100, marginLeft: '-40px' }}
+          src={`data:image/png;base64,${h1}`}
+        /></div>
+      <div className="row">
+        < img
+          style={{ height: 100 }}
+          src={`data:image/png;base64,${h2}`}
+        /></div>
+       <div className="row" style={{
+       justifyContent: 'flex-start'
+      }}>
+        < img
+          style={{ height: 65 }}
+          src={`data:image/png;base64,${h3}`}
+        /></div>
       {content1}
-      <div className="head4">2、饮酒</div>
+      <div className="row" style={{
+       justifyContent: 'flex-start'
+      }}>
+        < img
+          style={{ height: 70, marginLeft: '-15px' }}
+          src={`data:image/png;base64,${h4}`}
+        /></div>
       {content2}
-      <div className="head4">3、睡眠</div>
+      <div className="row" style={{
+       justifyContent: 'flex-start'
+      }}>
+        < img
+          style={{ height: 70 }}
+          src={`data:image/png;base64,${h5}`}
+        /></div>
       {content3}
-      <div className="head3">二、心理状态</div>
+      <div className="row">
+        < img
+          style={{ height: 100, marginLeft: '-40px' }}
+          src={`data:image/png;base64,${h6}`}
+        /></div>
       {content4}
-      <div className="head3">三、健康检测</div>
-      <div className="head4">1、体检</div>
+      <div className="row">
+        < img
+          style={{ height: 100, marginLeft: '-40px' }}
+          src={`data:image/png;base64,${h7}`}
+        /></div>
+    <div className="row" style={{
+       justifyContent: 'flex-start'
+      }}>
+        < img
+          style={{ height: 80, marginLeft: '-70px' }}
+          src={`data:image/png;base64,${h8}`}
+        /></div>
       {content5}
       {content6}
-      <div className="head4">2、智能检测设备</div>
+      <div className="row" style={{
+       justifyContent: 'flex-start'
+      }}>
+        < img
+          style={{ height: 100, marginLeft: '-30px' }}
+          src={`data:image/png;base64,${h9}`}
+        /></div>
       {content7}
     </div>
   );

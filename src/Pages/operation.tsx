@@ -37,7 +37,7 @@ export default class extends React.Component<Props, State> {
       // imagesPath: '',
       // outputPath: '',
       disable: false,
-      mode: 'preview',
+      mode: 'production',
       current: 0
     };
   }
@@ -245,13 +245,13 @@ export default class extends React.Component<Props, State> {
             </div>
             {data.length !== 0 && (
               <>
-                <RecipeTemplate
+                {/* <RecipeTemplate
                   key={data[0].init.id}
                   item={data[0]}
                   outputPath={outputPath}
                   imagesPath={imagesPath}
                   callback={this.destory}
-                />
+                /> */}
                 <ReportTemplate
                   key={data[0].init.id}
                   item={data[0]}

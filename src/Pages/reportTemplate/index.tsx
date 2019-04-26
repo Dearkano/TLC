@@ -76,12 +76,15 @@ export default class extends React.Component<Props, State> {
     const titlePhoto = fs
       .readFileSync(`./src/images/titleDec.png`)
       .toString('base64');
+    const headPhoto = fs
+      .readFileSync(`./src/images/static/头图.png`)
+      .toString('base64');
     const back = fs.readFileSync(`./src/images/back6.jpg`).toString('base64');
     return (
       <div id={`report-${init.name}`} className="template"
         style={{ backgroundImage: `url(data:image/jpg;base64,${back})`, backgroundSize: 'cover' }}>
-        <div className="row" style={{ height: 40, marginBottom: '1.5rem' }}>
-          <img
+        <div className="row" style={{ height: 300, marginBottom: '1.5rem' }}>
+          {/* <img
             style={{ height: 40, marginLeft: 60 }}
             src={`data:image/png;base64,${titlePhoto}`}
           />
@@ -94,6 +97,10 @@ export default class extends React.Component<Props, State> {
           <img
             style={{ height: 40, marginRight: 60 }}
             src={`data:image/png;base64,${titlePhoto}`}
+          /> */}
+          <img
+            style={{ height: 300 }}
+            src={`data:image/png;base64,${headPhoto}`}
           />
         </div>
         <BasicInformation item={item} />
